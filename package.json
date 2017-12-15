@@ -1,0 +1,15 @@
+{
+  "name": "event_crawler",
+  "version": "1.0.0",
+  "description": "a simple event search engine that allows user to look for events, see the location and the forecast of the date of the event.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Richard Jason (JasonR@cardiff.ac.uk)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pug": "^2.0.0-rc.4"
+  }
+}
