@@ -1,0 +1,45 @@
+.section-panel {
+    margin: 0;
+    @include body-side-gutter();
+    font-family: calibri;
+
+    .section-content {
+        > * {
+            padding-bottom: 1.5em;
+        }
+    }
+
+    .medium-content-wrapper {
+        max-width: 47.5em;
+        margin: auto;
+    }
+}
+
+section {
+    &:nth-child(odd) .section-panel {
+        background-color: #353537;
+        color: #FFFFFF;
+    }
+
+    &:nth-child(even) .section-panel {
+        background-color: #F7F7F7;
+        color: #0E0E0F;
+    }
+
+    .section-head {
+        text-align: center;
+        padding: 1em 0 0.25em 0;
+        > h1 {
+            margin: 0;
+        }
+    }
+
+}
+
+.small-btn {
+  padding: 5px;
+  &:hover {
+    background-color: white;
+    color:black;
+  }
+}

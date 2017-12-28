@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    include includes/header.pug
+    main
+        .search-toolbar
+            form
+                input.searchbar(name="search_text" type="text" placeholder="type here...")
+                input(type="button" value="Search")
+    script(src = "assets/js/util.js")
+    script(src = "assets/js/APIs/wordnik.js")
+    script(src = "assets/js/views/word.js")
+    script(src = "assets/js/controllers/wordController.js")
+    script(src = "assets/js/app.js")
+        

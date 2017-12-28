@@ -1,0 +1,32 @@
+// main scss file
+// base style
+@import 'base/variables';
+@import 'base/reset';
+
+// utilities
+@import 'utils/mixin';
+@import 'utils/helper';
+
+// layout style
+@import 'layout/header';
+@import 'layout/nav';
+@import 'layout/footer';
+
+// component style
+@import 'components/section';
+@import 'components/ec-button';
+
+// pages style - specific style for each page
+@import 'pages/home';
+@import 'pages/about';
+
+// media queries
+@media only screen and (min-width: 30em) {
+    @include home--md();
+    @include about--md();
+}
+
+@media only screen and (min-width: 60em) {
+    @include home--lg();
+    @include about--lg();
+}

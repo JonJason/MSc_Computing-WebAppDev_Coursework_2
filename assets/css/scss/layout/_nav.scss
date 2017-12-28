@@ -1,0 +1,53 @@
+nav {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.menu-btn {
+    align-self: center;
+    background: none;
+    border: 0;
+    color: #AAD7FF;
+    font-size: 1.2em;
+    padding: 0.5em;
+    margin: 0 0.5em;
+    outline: 0;
+}
+
+.menu-btn.active {
+    color: #D68802;
+}
+
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 3.75em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(#000000, 0.5);
+}
+
+.menu-btn.active ~ .nav-overlay {
+    display: block;
+}
+
+.nav-list {
+    display: none;
+    font-family: monospace;
+}
+
+.menu-btn.active ~ .nav-list {
+    display: block;
+    position: absolute;
+    top: 4.6em;
+    max-height: 70vh;
+    overflow: scroll;
+    width: 100vw;
+    background-color: #393939;
+}

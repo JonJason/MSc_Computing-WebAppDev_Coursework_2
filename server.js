@@ -4,13 +4,28 @@ var server = express();
 
 server.listen(3000);
 
-server.use(express.static("assets"));
+server.use("/assets", express.static(__dirname + "/assets"));
 
 server.set("views", "views");
 server.set("view engine", "pug");
 
 server.get("/", function(request, response) {
     response.render("home", {
-        desc: 'Find events by text or image'
-    })
+        page: "home",
+        desc: "Learn English Fun!"
+    });
+});
+
+server.get("/word", function(request, response) {
+    response.render("word", {
+        page: "word",
+        desc: "English word definition and music with it in the lyrics"
+    });
+});
+
+server.get("/about", function(request, response) {
+    response.render("about", {
+        page: "about",
+        desc: "All about us and how to contact us"
+    });
 });

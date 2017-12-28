@@ -1,0 +1,24 @@
+button.ec-button {
+    height: 3em;
+    padding: 0 1.125em;
+    border-radius: $btn-border-radius;
+    border-style: solid;
+    background-color: transparent;
+    transition: color 0.5s, border-color 0.5s;
+
+    &.ec-dark-blue {
+        @include ec-button-color(#000c7c);
+
+        &:hover {
+            @include ec-button-color(#b35700);
+        }
+    }
+
+    &.ec-blue {
+        @include ec-button-color(#22a7f0);
+
+        &:hover {
+            @include ec-button-color(#ff8c00);
+        }
+    }
+}

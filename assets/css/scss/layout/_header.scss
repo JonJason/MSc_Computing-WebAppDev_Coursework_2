@@ -1,0 +1,32 @@
+header { // horizontal bar on top of the page
+    position: relative; // to be a base for its children's position and size
+    height: $header-height;
+    width: 100%;
+    background-color: #00396C;
+}
+
+.brand { // brand element with brand icon and brand name inside
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    .brand-link {
+        height: 100%;
+        padding: 0.875em 0 0.875em 1.25em;
+
+        .brand-icon {
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .brand-name {
+            margin-left: 0.5em;
+            color: #AAD7FF;
+            vertical-align: middle;
+            font-size: 1.4em;
+        }
+    }
+
+}

@@ -1,0 +1,13 @@
+@mixin side-gutter($size) {
+    padding-left: $size;
+    padding-right: $size;
+}
+
+@mixin body-side-gutter() {
+    @include side-gutter(1em);
+}
+
+@mixin ec-button-color($color) {
+    color: $color;
+    border-color: $color;
+}
