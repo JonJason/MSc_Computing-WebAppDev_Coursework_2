@@ -22,12 +22,18 @@ html
         // Font Awesome Icon
         link(
             rel = "stylesheet"
-            href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            href = "node_modules/font-awesome/css/font-awesome.min.css"
         )
         title English Crawler: #{desc}
     body(data-page=page)
+        
         include includes/header.pug
         block content
         include includes/footer.pug
-        block scripts  
+        .page-overlay
+        script(src="assets/js/util.js")
+        script(src="assets/js/views/layout.js")
+        script(src="assets/js/controllers/layoutController.js")
+        block scripts
+        script(src="assets/js/app.js")
         

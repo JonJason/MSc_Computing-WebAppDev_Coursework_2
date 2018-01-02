@@ -5,6 +5,7 @@ var server = express();
 server.listen(3000);
 
 server.use("/assets", express.static(__dirname + "/assets"));
+server.use("/node_modules", express.static(__dirname + "/node_modules"));
 
 server.set("views", "views");
 server.set("view engine", "pug");

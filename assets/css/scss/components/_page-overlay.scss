@@ -1,0 +1,19 @@
+.page-overlay {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    background-color: rgba(#000000, 0.5);
+    // add showing and hiding animation to the overlay
+    // note: when hiding, z-index goes from 500 to -1. The overlay will only hide when z-index reach -1,
+    // which is less than main and footer default z-index, 0. Therefore, the animation also works while hiding
+    transition: opacity 0.5s, z-index 0.5s;
+
+    &.show {
+        z-index: 500;
+        opacity: 1;
+    }
+}

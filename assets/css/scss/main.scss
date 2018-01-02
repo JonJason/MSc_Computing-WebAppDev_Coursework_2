@@ -15,18 +15,30 @@
 // component style
 @import 'components/section';
 @import 'components/ec-button';
+@import 'components/page-overlay';
 
 // pages style - specific style for each page
 @import 'pages/home';
+@import 'pages/word';
 @import 'pages/about';
 
 // media queries
+// medium screen
 @media only screen and (min-width: 30em) {
+    // layout
+    @include nav--md();
+
+    // pages
     @include home--md();
     @include about--md();
 }
 
-@media only screen and (min-width: 60em) {
+// large screen
+@media only screen and (min-width: 50em) {
+    // layout
+    @include nav--lg();
+
+    // pages
     @include home--lg();
     @include about--lg();
 }

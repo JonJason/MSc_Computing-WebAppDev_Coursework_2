@@ -7,23 +7,11 @@ block content
             .hero-image-content
                 .tag-line
                     h1 Find How to Express Yourself
-                p Type English words that you want to learn
-                form#word_search_form
-                    .input-wrapper.searchbar-wrapper
-                        label.search-icon-container(for="search_text") 
-                            i.fa.fa-search
-                        input.searchbar(id="search_text" name="q" type="search" align="bottom" placeholder="type here...")
-                        button.search-btn(type="submit")
-                            span Search
-                            i.search-icon.fa.fa-search
-                p or upload an Image to see what is it called in english
-                form#img_upload_form
-                    .input-wrapper.img-uploader-wrapper
-                        input.img-uploader(id="img_upload" type="file")
-                        label.image-uploader-label.text-center(for="img_upload")
-                            i.upload-icon.fa.fa-upload.v-align-middle
-                            span.v-align-middle Choose an Image
-                                span.drop-img-text &nbsp;or Drop your Image Here
+                .intro-text
+                    h4 Using this application, you can learn english fun with music and picture. What are you waiting for?
+                .text-center
+                    button.ec-button.ec-green.link-btn(data-page="word")
+                        strong Let's Go!
         section#words
             .section-panel
         section#help
@@ -40,9 +28,7 @@ block content
                         button.ec-button.ec-dark-blue.link-btn(data-page="about")
                             strong Find out!
 
-block scripts                            
-    script(src="assets/js/util.js")
+block scripts
     script(src="assets/js/views/home.js")
     script(src="assets/js/controllers/homeController.js")
-    script(src="assets/js/app.js")
         

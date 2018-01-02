@@ -4,8 +4,12 @@
 
 body {
     margin: 0;
+    min-width: 18em; // set minimum width to body to prevent content being squeezed in smaller screen.
     font-family: sans-serif;
-    min-width: 18em;
+}
+
+main {
+    margin-top: $header-height;
 }
 
 a {

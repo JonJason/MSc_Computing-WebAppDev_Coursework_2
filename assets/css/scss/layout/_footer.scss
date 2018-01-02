@@ -1,6 +1,6 @@
 footer {
-    height: 2em;
-    line-height: 2em;
+    height: $footer-height;
+    line-height: $footer-height;
     bottom: 0;
     left: 0;
     right: 0;
@@ -10,6 +10,6 @@ footer {
     .rj-copyright {
         padding-left: 1em;
         vertical-align: middle;
-        font-size: 0.5em;
+        font-size: 0.8em;
     }
 }

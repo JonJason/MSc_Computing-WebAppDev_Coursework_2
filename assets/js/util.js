@@ -86,6 +86,29 @@ var UTIL = (function (UTIL) {
 	};
 
 	/**
+	 * toggle class in an element
+	 * @param {DOM Element Object} element	- DOM Element Object where we want to remove a class from
+	 * @param {String} name					- class name
+	 * @param {Boolean} state 				- state (optional)
+	 */
+	UTIL.$toggleClass = function(element, name, state) {
+		if (state === undefined) {
+			element.classList.toggle(name);
+		} else {
+			element.classList.toggle(name, !!state);
+		}
+	};
+
+	/**
+	 * return boolean indicating that the element contains a certain class or not
+	 * @param {DOM Element Object} element	- DOM Element Object where we want to remove a class from
+	 * @param {String} name					- class name
+	 */
+	UTIL.$containsClass = function(element, name) {
+		return element.classList.contains(name);
+	};
+
+	/**
 	 * this function is for sending a request to another server
 	 * @param {String} url		- endpoint url
 	 * @param {Object} options	- this parameter should consist of onLoad, type(default = "GET"),

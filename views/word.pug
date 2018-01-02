@@ -1,15 +1,29 @@
 extends layout
 
 block content
-    include includes/header.pug
     main
-        .search-toolbar
-            form
-                input.searchbar(name="search_text" type="text" placeholder="type here...")
-                input(type="button" value="Search")
-    script(src = "assets/js/util.js")
-    script(src = "assets/js/APIs/wordnik.js")
-    script(src = "assets/js/views/word.js")
-    script(src = "assets/js/controllers/wordController.js")
-    script(src = "assets/js/app.js")
+        .section
+            .section-panel.search-panel
+                    p Type English words that you want to learn
+                    form#word_search_form
+                        .input-wrapper.searchbar-wrapper
+                            label.search-icon-container(for="search_text") 
+                                i.fa.fa-search
+                            input.searchbar(id="search_text" name="q" type="search" align="bottom" placeholder="type here...")
+                            button.search-btn(type="submit")
+                                span Search
+                                i.search-icon.fa.fa-search
+                    p or upload an Image to see what is it called in english
+                    form#img_upload_form
+                        .input-wrapper.img-uploader-wrapper
+                            input.img-uploader(id="img_upload" type="file")
+                            label.image-uploader-label.text-center(for="img_upload")
+                                i.upload-icon.fa.fa-upload.v-align-middle
+                                span.v-align-middle Choose an Image
+                                    span.drop-img-text &nbsp;or Drop your Image Here
+                    
+block scripts
+    script(src="assets/js/APIs/wordnik.js")
+    script(src="assets/js/views/word.js")
+    script(src="assets/js/controllers/wordController.js")
         

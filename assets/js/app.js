@@ -4,7 +4,7 @@
 	var pages = {
 
 		/**
-		 * Sets up Home page.
+		 * Home page app.
 		 */
 		Home: function () {
 			this.view = new app.HomeView();
@@ -12,19 +12,42 @@
 		},
 
 		/**
-		* Sets up About page.
+		 * Word page app.
+		 */
+		 Word: function () {
+		 	this.view = new app.WordView();
+			this.controller = new app.wordController(this.view);
+		 },
+
+		/**
+		* About page app.
 		*/
 		About: function () {
 			this.view = new app.AboutView();
 			this.controller = new app.AboutController(this.view);
 		},
+	};
+
+	var Layout = function() {
+		this.view = new app.LayoutView();
+		this.controller = new app.LayoutController(this.view);
 	}
 
-	function setupPage() {
+	function setupLayout (name) {
+		app.layout = new Layout();
+	};
+
+	function setupPage(name) {
+		app.pages = app.pages || {};
+		app.pages[name] = new pages[UTIL.capitalise(name)]();
+	};
+
+	function setupApp() {
 		var pageName = document.body.dataset.page;
-		new pages[UTIL.capitalise(pageName)];
-	}
+		setupLayout(pageName);
+		setupPage(pageName);
+	};
 
-	UTIL.$on(window, 'load', setupPage);
+	UTIL.$on(window, 'load', setupApp);
 	// UTIL.$on(window, 'hashchange', setView);
 })();

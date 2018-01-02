@@ -5,10 +5,42 @@ header
             span.brand-name
                 strong English Crawler
     nav
-        button.menu-btn(type="button")
+        button.menu-btn.switch.bind-overlay(type="button")
             i.fa.fa-bars
-        .nav-overlay
         ul.nav-list
             li.nav-item
-                a.nav-link.active(href="/")
-                    strong Home
+                a.nav-link(data-link-page="home" href="/")
+                    i.fa.fa-home
+                    strong &nbsp;Home
+            li.nav-item.has-dropdown
+                a.nav-link(data-link-page="word" href="/word")
+                    i.fa.fa-search
+                    strong &nbsp;Word&nbsp;
+                    i.arrow-icon.arrow-down.fa.fa-caret-down
+                    i.arrow-icon.arrow-up.fa.fa-caret-up
+                div.dropdown
+                    div.dropdown-group
+                        ul.dropdown-list
+                            li.dropdown-item 
+                                a.dropdown-link(href="/word") Search for a word
+                            li.dropdown-item 
+                                a.dropdown-link(href="/word#ofTheDay") Word of the day
+                            li.dropdown-item 
+                                a.dropdown-link(href="/word#random") Random Word
+            li.nav-item.has-dropdown
+                a.nav-link(data-link-page="help" href="/help")
+                    i.fa.fa-question-circle
+                    strong &nbsp;Need Help?&nbsp;
+                    i.arrow-icon.arrow-down.fa.fa-caret-down
+                    i.arrow-icon.arrow-up.fa.fa-caret-up
+                div.dropdown
+                    div.dropdown-group
+                        ul.dropdown-list
+                            li.dropdown-item
+                                a.dropdown-link(href="training.html#warm_up") Warm up
+                            li.dropdown-item
+                                a.dropdown-link(href="training.html#weekly_program") Weekly Program
+            li.nav-item
+                a.nav-link(data-link-page="about" href="/about")
+                    i.fa.fa-vcard
+                    strong &nbsp;Who we are?

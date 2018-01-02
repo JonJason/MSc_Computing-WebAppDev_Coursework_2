@@ -12,7 +12,7 @@ nav {
     align-self: center;
     background: none;
     border: 0;
-    color: #AAD7FF;
+    color: $font-color-1;
     font-size: 1.2em;
     padding: 0.5em;
     margin: 0 0.5em;
@@ -20,34 +20,165 @@ nav {
 }
 
 .menu-btn.active {
-    color: #D68802;
-}
-
-.nav-overlay {
-    display: none;
-    position: fixed;
-    top: 3.75em;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(#000000, 0.5);
-}
-
-.menu-btn.active ~ .nav-overlay {
-    display: block;
+    color: $font-color-3;
 }
 
 .nav-list {
-    display: none;
     font-family: monospace;
+    position: fixed;
+    top: 4.6em;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100vw;
+    background-color: $bg-color-2;
+    transition: transform 0.5s;
+    transform: translate(0, 100%);
+
+    .nav-link, .dropdown-link {
+        color: $font-color-2;
+    }
+
 }
 
 .menu-btn.active ~ .nav-list {
-    display: block;
-    position: absolute;
-    top: 4.6em;
-    max-height: 70vh;
-    overflow: scroll;
-    width: 100vw;
-    background-color: #393939;
+    transform: none;
+}
+
+.nav-item {
+    &:not(:first-child) {
+        .nav-link {
+            border-top: 0.1em solid $font-color-2;
+        }
+    }
+
+    .nav-link {
+        display: block;
+        font-size: 1.25em;
+        padding: 0.8em 1.6em;
+
+        .arrow-icon {
+            display: none;
+        }
+    }
+
+    .dropdown {
+        .dropdown-link {
+            font-size: 1.1em;
+            display: block;
+            padding: 0.8em 1.8em;
+        }
+    }
+}
+
+@mixin nav--md {
+
+}
+
+@mixin nav--lg {
+    .menu-btn {
+        display: none;
+    }
+
+    .nav-list {
+        top: auto; // reset bottom property
+        bottom: auto; // reset bottom property
+        width: auto; // follow its content width
+        background-color: transparent;
+        transform: none;
+        position: static;
+        overflow: visible;
+
+        .nav-link {
+            color: $font-color-1;
+        }
+    }
+
+    .nav-item {
+        position: relative;
+        display: inline-block;
+        padding-left: 0;
+
+        .nav-link {
+            border: none !important;
+            transition: color 0.2s;
+            padding-bottom: 1em;
+
+            .arrow-icon {
+                &.arrow-down {
+                    display: inline-block;
+                }
+            }
+        }
+
+        &.has-dropdown:hover {
+            .nav-link {
+                .arrow-icon {
+                    &.arrow-down {
+                        display: none;
+                    }
+
+                    &.arrow-up {
+                        display: inline-block;
+                    }
+                }
+            }
+
+            .dropdown {
+                pointer-events: auto;
+                top: $header-height + 0.1em;
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+            .nav-link {
+                color: $font-color-3;
+            }
+        }
+
+        .dropdown {
+
+            .dropdown-item:not(:last-child) {
+
+                border-bottom: 0.1em solid $font-color-2;
+            }
+
+            .dropdown-link {
+                padding: 1em !important;
+            }
+        }
+    }
+
+    .dropdown {
+        pointer-events: none;
+        display: block;
+        position: absolute;
+        top: $header-height - 0.5em;
+
+        // make the dropdown align right with the center of the nav item
+        right: 50%;
+        // translate the dropdown 50% of its own wide so its center aligned with the center of the nav item
+        transform: translateX(50%);
+        background-color: $bg-color-2;
+        opacity: 0;
+        transition: opacity 0.3s, top 0.3s;
+
+        .dropdown-list {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            white-space: nowrap;
+        }
+
+        .dropdown-link {
+            color: $font-color-2;
+        }
+
+        .dropdown-item {
+            &:hover {
+                background-color: rgba(white, 0.4);
+            }
+        }
+    }
 }

@@ -21,4 +21,12 @@ button.ec-button {
             @include ec-button-color(#ff8c00);
         }
     }
+
+    &.ec-green {
+        @include ec-button-color(#00ff00);
+
+        &:hover {
+            @include ec-button-color(#ff8c00);
+        }
+    }
 }

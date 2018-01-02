@@ -16,10 +16,6 @@
 		self.view.bind("triggerSearch", function (searchText) {
 			self.searchForWord(searchText);
 		});
-
-		self.view.bind("goToPage", function (page) {
-			self.goToPage(page);
-		});
 	}
 
 	Controller.prototype.lightenSearchbar = function () {
@@ -40,11 +36,6 @@
 		// go to word page with searchText as keyword
 		window.location.href = UTIL.buildRequestURI(window.location.origin, { q: searchText }, "word");
     };
-
-	Controller.prototype.goToPage = function (page) {
-		// go to a page
-		window.location.href = UTIL.buildRequestURI(window.location.origin, {}, page);
-	};
 
 	// Export to window
 	window.app = window.app || {};
