@@ -111,7 +111,7 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .page-overlay.show { z-index: 500; opacity: 1; }
 
-.hero-image-wrapper { background-color: #3B598C; padding-bottom: 3em; margin: 0; padding-left: 1em; padding-right: 1em; color: white; }
+.hero-image-wrapper { background-color: #3B598C; padding-bottom: 3em; min-height: 100vh; margin: 0; padding-left: 1em; padding-right: 1em; color: white; }
 
 .hero-image-wrapper .hero-image-content { max-width: 47.5em; margin: auto; }
 

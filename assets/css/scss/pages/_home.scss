@@ -1,6 +1,7 @@
 .hero-image-wrapper {
     background-color: #3B598C;
     padding-bottom: 3em;
+    min-height: 100vh;
     margin: 0;
     @include body-side-gutter();
     color: white;
