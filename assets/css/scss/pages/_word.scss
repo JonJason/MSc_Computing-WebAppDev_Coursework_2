@@ -1,10 +1,24 @@
 .search-panel {
+    min-height: calc(100vh - #{$header-height});
+
+    .section-head {
+        padding-top: 2em;
+        padding-bottom: 1em;
+    }
+
+    .intro-text, .separator {
+        padding-top: 0.8em;
+    }
+
+    .intro-text {
+        padding-bottom: 0.8em;
+        margin: 0;
+    }
 
     .input-wrapper {
         display: flex;
         align-items: center;
         border-radius: $btn-border-radius;
-        margin-bottom: 1em;
         padding: 0.3em;
 
         &.searchbar-wrapper, &.img-uploader-wrapper {

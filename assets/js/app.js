@@ -35,6 +35,7 @@
 
 	function setupLayout (name) {
 		app.layout = new Layout();
+		app.layout.controller.setView(name);
 	};
 
 	function setupPage(name) {

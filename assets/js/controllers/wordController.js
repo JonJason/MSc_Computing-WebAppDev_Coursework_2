@@ -27,13 +27,16 @@
 	};
 
     Controller.prototype.searchForWord = function (searchText) {
+		var self = this;
         searchText = searchText.trim();
 
-		if (searchText === '') {
+		if (searchText === '') { // cancel search if only whitespaces typed in the searchbar
 			return;
 		}
 
-
+		API.wordnik.searchForWord(searchText, function(count) {
+			console.log(count);
+		});
     };
 
 	// Export to window

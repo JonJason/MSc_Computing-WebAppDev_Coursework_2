@@ -11,3 +11,16 @@
     color: $color;
     border-color: $color;
 }
+
+@mixin font-awesome($icon) {
+    font-family: FontAwesome; // using font awesome icon
+    content: $icon; // child icon
+}
+
+@mixin fa-child() {
+    @include font-awesome("\f1ae"); // child icon
+}
+
+@mixin fa-arrow-right() {
+    @include font-awesome("\f061");
+}

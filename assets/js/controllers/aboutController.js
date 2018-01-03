@@ -38,12 +38,12 @@
 		}
 
 		// go to word page with searchText as keyword
-		window.location.href = UTIL.buildRequestURI(window.location.origin, { q: searchText }, "word");
+		window.location.href = UTIL.buildRequestURI(window.location.origin, { q: searchText }, "/word");
     };
 
 	Controller.prototype.goToPage = function (page) {
 		// go to a page
-		window.location.href = UTIL.buildRequestURI(window.location.origin, {}, page);
+		window.location.href = UTIL.buildRequestURI(window.location.origin, {}, "/" + page);
 	};
 
 	// Export to window

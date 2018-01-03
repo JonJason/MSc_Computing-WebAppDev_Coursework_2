@@ -152,7 +152,7 @@ var UTIL = (function (UTIL) {
 		var uri = base;
 
 		if (typeof suffix == "string") {
-			uri += "/" + suffix; // add uri suffix
+			uri += suffix; // add uri suffix
 		}
 
 		var queryStrings = [];

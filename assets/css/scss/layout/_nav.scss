@@ -57,6 +57,13 @@ nav {
         font-size: 1.25em;
         padding: 0.8em 1.6em;
 
+        &.ongoing-page:before { // show child icon on left of the nav link of the ongoing page
+            @include fa-child();
+            color: $font-color-3;
+            left: 0.3em;
+            position: absolute;
+        }
+
         .arrow-icon {
             display: none;
         }
@@ -132,8 +139,16 @@ nav {
         }
 
         &:hover {
-            .nav-link {
+            .nav-link:not(.ongoing-page):after {
+                @include fa-arrow-right();
+                position: absolute;
+                left: 0.3em;
                 color: $font-color-3;
+
+                animation-name: back-and-forth;
+                animation-duration: 0.6s;
+                animation-timing-function: ease-in-out;
+                animation-iteration-count: infinite;
             }
         }
 

@@ -47,6 +47,8 @@ var API = (function(parent){
 
         UTIL.sendRequest(UTIL.buildRequestURI(this.baseURL, params, suffix), {
             onLoad: function(response) {
+                console.log(JSON.parse(response));
+                return;
                 callback && callback(JSON.parse(response).searchResults);
             }
         });

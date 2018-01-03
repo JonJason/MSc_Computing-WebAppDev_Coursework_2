@@ -1,0 +1,5 @@
+@keyframes back-and-forth {
+    0%   {transform: translateX(0%);}
+    50%  {transform: translateX(-40%);}
+    100% {transform: translateX(0%);}
+}

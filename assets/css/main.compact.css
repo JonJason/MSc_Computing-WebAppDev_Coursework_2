@@ -1,3 +1,8 @@
+@charset "UTF-8";
+@keyframes back-and-forth { 0% { transform: translateX(0%); }
+  50% { transform: translateX(-40%); }
+  100% { transform: translateX(0%); } }
+
 * { box-sizing: border-box; }
 
 body { margin: 0; min-width: 18em; font-family: sans-serif; }
@@ -51,6 +56,8 @@ nav { position: absolute; right: 0; bottom: 0; top: 0; display: flex; align-item
 .nav-item:not(:first-child) .nav-link { border-top: 0.1em solid #292929; }
 
 .nav-item .nav-link { display: block; font-size: 1.25em; padding: 0.8em 1.6em; }
+
+.nav-item .nav-link.ongoing-page:before { font-family: FontAwesome; content: ""; color: #D68802; left: 0.3em; position: absolute; }
 
 .nav-item .nav-link .arrow-icon { display: none; }
 
@@ -106,7 +113,15 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .hero-image-wrapper .hero-image-content .intro-text { padding-bottom: 3em; }
 
-.search-panel .input-wrapper { display: flex; align-items: center; border-radius: 0.25em; margin-bottom: 1em; padding: 0.3em; }
+.search-panel { min-height: calc(100vh - 3.75em); }
+
+.search-panel .section-head { padding-top: 2em; padding-bottom: 1em; }
+
+.search-panel .intro-text, .search-panel .separator { padding-top: 0.8em; }
+
+.search-panel .intro-text { padding-bottom: 0.8em; margin: 0; }
+
+.search-panel .input-wrapper { display: flex; align-items: center; border-radius: 0.25em; padding: 0.3em; }
 
 .search-panel .input-wrapper.searchbar-wrapper, .search-panel .input-wrapper.img-uploader-wrapper { background-color: #F4F4F4; transition: background-color 0.1s; }
 
@@ -165,7 +180,7 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
   .nav-item.has-dropdown:hover .nav-link .arrow-icon.arrow-down { display: none; }
   .nav-item.has-dropdown:hover .nav-link .arrow-icon.arrow-up { display: inline-block; }
   .nav-item.has-dropdown:hover .dropdown { pointer-events: auto; top: 3.85em; opacity: 1; }
-  .nav-item:hover .nav-link { color: #D68802; }
+  .nav-item:hover .nav-link:not(.ongoing-page):after { font-family: FontAwesome; content: ""; position: absolute; left: 0.3em; color: #D68802; animation-name: back-and-forth; animation-duration: 0.6s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
   .nav-item .dropdown .dropdown-item:not(:last-child) { border-bottom: 0.1em solid #292929; }
   .nav-item .dropdown .dropdown-link { padding: 1em !important; }
   .dropdown { pointer-events: none; display: block; position: absolute; top: 3.25em; right: 50%; transform: translateX(50%); background-color: #89D0FF; opacity: 0; transition: opacity 0.3s, top 0.3s; }
