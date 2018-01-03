@@ -17,10 +17,34 @@ nav {
     padding: 0.5em;
     margin: 0 0.5em;
     outline: 0;
+
+    .menu-icon, .close-icon {
+        transition: transform 0.3s, opacity 0.2s;
+    }
+
+    .menu-icon {
+        opacity: 1;
+        transform: rotateZ(0);
+    }
+
+    .close-icon {
+        opacity: 0;
+        position: absolute;
+        right: 1em;
+        transform: rotateZ(-45deg);
+    }
 }
 
 .menu-btn.active {
-    color: $font-color-3;
+    .menu-icon {
+        opacity: 0;
+        transform: rotateZ(45deg);
+    }
+
+    .close-icon {
+        opacity: 1;
+        transform: rotateZ(0deg);
+    }
 }
 
 .nav-list {
@@ -139,12 +163,13 @@ nav {
         }
 
         &:hover {
-            .nav-link:not(.ongoing-page):after {
+            .nav-link:not(.ongoing-page):after { // add arrow right on hover
                 @include fa-arrow-right();
                 position: absolute;
                 left: 0.3em;
                 color: $font-color-3;
 
+                // make the arrow move back and forth
                 animation-name: back-and-forth;
                 animation-duration: 0.6s;
                 animation-timing-function: ease-in-out;
