@@ -14,7 +14,8 @@ var API = (function(parent){
 	    this.baseURL = "http://api.wordnik.com:80/v4";
         this.suffixes = {
             "wordsSearch": "/words.json/search/{{word}}",
-            "wordDef": "/word.json/{{word}}/definitions"
+            "wordDef": "/word.json/{{word}}/definitions",
+            "randomWord": "/words.json/randomWord"
         };
 	};
 
@@ -54,14 +55,14 @@ var API = (function(parent){
         });
     };
 
-    api.prototype.getWordDef = function(word, callback) {
+    api.prototype.getWordDef = function (word, callback) {
         var params = {
+            "api_key": apiKey,
             "limit": 10,
             "includeRelated": true,
             "sourceDictionaries": "all",
             "useCanonical": true,
-            "includeTags": false,
-            "api_key": "a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
+            "includeTags": false
         };
 
         var suffix = this.getSuffix("wordDef", { word: word });
@@ -71,7 +72,28 @@ var API = (function(parent){
                 callback && callback(JSON.parse(response));
             }
         });
-    }
+    };
+
+    api.prototype.getRandomWord = function (callback) {
+        var params = {
+            "api_key": apiKey,
+            "hasDictionaryDef": true,
+            "minCorpusCount": 0,
+            "maxCorpusCount": -1,
+            "minDictionaryCount": 1,
+            "maxDictionaryCount": -1,
+            "minLength": 2,
+            "maxLength": -1
+        };
+
+        var suffix = this.getSuffix("randomWord", { word: word });
+
+        UTIL.sendRequest(UTIL.buildRequestURI(this.baseURL, params, suffix), {
+            onLoad: function(response) {
+                callback && callback(JSON.parse(response));
+            }
+        });
+    };
 
 
     parent.wordnik = new api()

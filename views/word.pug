@@ -2,7 +2,7 @@ extends layout
 
 block content
     main
-        section
+        section#controls
             .section-panel.search-panel
                 .section-head
                     h1 Search for word(s)
@@ -18,24 +18,28 @@ block content
                                 i.search-icon.fa.fa-search
                     .text-center.separator
                         span - or -
-                    p.intro-text upload an Image to see what is it called in english
+                    p.intro-text upload an Image and to get related words
                     form#img_upload_form
                         .input-wrapper.img-uploader-wrapper
                             input.img-uploader(id="img_upload" type="file")
                             label.image-uploader-label.text-center(for="img_upload")
                                 i.upload-icon.fa.fa-upload.v-align-middle
                                 span.v-align-middle Choose an Image
-                                    span.drop-img-text &nbsp;or Drop your Image Here
-        section
+                                span.drop-img-text &nbsp;or Drop your Image Here
+                    p.intro-text You can also look:
+                    .buttons-wrapper
+                        a
+                            i.fa.fa-star
+                            | &nbsp;
+                            strong Word of the Day
+                        br
+                        a
+                            i.fa.fa-random
+                            | &nbsp;
+                            strong Random Word
+                    
+        section#results
             .section-panel
-                .section-head
-                    h1 Word of the Day
-                .section-content
-        section
-            .section-panel
-                .section-head
-                    h1 Random Word
-                .section-content
 block scripts
     script(src="assets/js/APIs/wordnik.js")
     script(src="assets/js/views/word.js")

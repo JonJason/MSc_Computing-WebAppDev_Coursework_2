@@ -24,3 +24,11 @@
 @mixin fa-arrow-right() {
     @include font-awesome("\f061");
 }
+
+@mixin fa-caret-up {
+    @include font-awesome("\f0d8");
+}
+
+@mixin fa-caret-down {
+    @include font-awesome("\f0d7");
+}

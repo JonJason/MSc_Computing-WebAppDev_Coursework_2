@@ -67,8 +67,6 @@ nav { position: absolute; right: 0; bottom: 0; top: 0; display: flex; align-item
 
 .nav-item .nav-link.ongoing-page:before { font-family: FontAwesome; content: ""; color: #D68802; left: 0.3em; position: absolute; }
 
-.nav-item .nav-link .arrow-icon { display: none; }
-
 .nav-item .dropdown .dropdown-link { font-size: 1.1em; display: block; padding: 0.8em 1.8em; }
 
 footer { height: 2em; line-height: 2em; bottom: 0; left: 0; right: 0; background-color: #5F5F5F; color: white; }
@@ -149,7 +147,7 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .search-panel label.search-icon-container { display: none; }
 
-.search-panel label.image-uploader-label { width: 100%; height: 4em; line-height: 4em; }
+.search-panel label.image-uploader-label { width: 100%; height: 3em; line-height: 3em; }
 
 .search-panel label.image-uploader-label i { padding-left: 0; }
 
@@ -184,11 +182,10 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
   .nav-list .nav-link { color: #AAD7FF; }
   .nav-item { position: relative; display: inline-block; padding-left: 0; }
   .nav-item .nav-link { border: none !important; transition: color 0.2s; padding-bottom: 1em; }
-  .nav-item .nav-link .arrow-icon.arrow-down { display: inline-block; }
-  .nav-item.has-dropdown:hover .nav-link .arrow-icon.arrow-down { display: none; }
-  .nav-item.has-dropdown:hover .nav-link .arrow-icon.arrow-up { display: inline-block; }
+  .nav-item.has-dropdown .nav-link:after { font-family: FontAwesome; content: ""; }
+  .nav-item.has-dropdown:hover .nav-link:after { font-family: FontAwesome; content: ""; }
   .nav-item.has-dropdown:hover .dropdown { pointer-events: auto; top: 3.85em; opacity: 1; }
-  .nav-item:hover .nav-link:not(.ongoing-page):after { font-family: FontAwesome; content: ""; position: absolute; left: 0.3em; color: #D68802; animation-name: back-and-forth; animation-duration: 0.6s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+  .nav-item:hover .nav-link:not(.ongoing-page):before { font-family: FontAwesome; content: ""; position: absolute; left: 0.3em; color: #D68802; animation-name: back-and-forth; animation-duration: 0.6s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
   .nav-item .dropdown .dropdown-item:not(:last-child) { border-bottom: 0.1em solid #292929; }
   .nav-item .dropdown .dropdown-link { padding: 1em !important; }
   .dropdown { pointer-events: none; display: block; position: absolute; top: 3.25em; right: 50%; transform: translateX(50%); background-color: #89D0FF; opacity: 0; transition: opacity 0.3s, top 0.3s; }

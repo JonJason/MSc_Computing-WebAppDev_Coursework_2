@@ -88,10 +88,6 @@ nav {
             left: 0.3em;
             position: absolute;
         }
-
-        .arrow-icon {
-            display: none;
-        }
     }
 
     .dropdown {
@@ -135,36 +131,32 @@ nav {
             border: none !important;
             transition: color 0.2s;
             padding-bottom: 1em;
-
-            .arrow-icon {
-                &.arrow-down {
-                    display: inline-block;
-                }
-            }
         }
 
-        &.has-dropdown:hover {
-            .nav-link {
-                .arrow-icon {
-                    &.arrow-down {
-                        display: none;
-                    }
+        &.has-dropdown {
 
-                    &.arrow-up {
-                        display: inline-block;
-                    }
+            .nav-link:after { // add arrow down for nav link which has a dropdown
+                @include fa-caret-down();
+            }
+
+            &:hover {
+
+                .nav-link:after { // change the arrow to arrow up when the nav link is hovered
+                    @include fa-caret-up();
+                }
+
+                .dropdown {
+                    pointer-events: auto;
+                    top: $header-height + 0.1em;
+                    opacity: 1;
                 }
             }
 
-            .dropdown {
-                pointer-events: auto;
-                top: $header-height + 0.1em;
-                opacity: 1;
-            }
         }
 
         &:hover {
-            .nav-link:not(.ongoing-page):after { // add arrow right on hover
+
+            .nav-link:not(.ongoing-page):before { // add moving arrow on hover for nav link other than current page nav link
                 @include fa-arrow-right();
                 position: absolute;
                 left: 0.3em;
@@ -176,6 +168,7 @@ nav {
                 animation-timing-function: ease-in-out;
                 animation-iteration-count: infinite;
             }
+
         }
 
         .dropdown {
@@ -217,9 +210,11 @@ nav {
         }
 
         .dropdown-item {
+
             &:hover {
                 background-color: rgba(white, 0.4);
             }
+
         }
     }
 }
