@@ -10,8 +10,9 @@ block content
                 .intro-text
                     h4 Using this application, you can learn english fun with music and picture. What are you waiting for?
                 .text-center
-                    button.ec-button.ec-green.link-btn(data-page="word")
-                        strong Let's Go!
+                    a(href="/word")
+                        button.ec-button.ec-green
+                            strong Let's Go!
         section#help
             .section-panel
                 .section-head
@@ -26,8 +27,9 @@ block content
                     .text-center
                         span You must be curious who build this website, don't you?
                     .text-center
-                        button.ec-button.ec-dark-blue.link-btn(data-page="about")
-                            strong Find out!
+                        a(href="/about")
+                            button.ec-button.ec-blue
+                                strong Find out!
 
 block scripts
     script(src="assets/js/views/home.js")

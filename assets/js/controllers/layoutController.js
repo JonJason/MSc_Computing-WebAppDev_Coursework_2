@@ -6,10 +6,6 @@
 		var self = this;
 		self.view = view;
 
-        self.view.bind("linkButtonClick", function (page) {
-            window.location.href = UTIL.buildRequestURI(window.location.origin, {}, "/" + page);
-        });
-
 		self.view.bind("menuButtonClick", function () {
 			self.showNavigation();
 		});

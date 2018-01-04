@@ -34,11 +34,7 @@
      */
 	View.prototype.bind = function (event, handler) {
 		var self = this;
-		if (event === "linkButtonClick") {
-    		UTIL.$delegate(self.$body, ".link-btn", "click", function(event, targetElement) {
-                handler(targetElement.dataset.page);
-    		});
-		} else if (event === "menuButtonClick") {
+		if (event === "menuButtonClick") {
 			UTIL.$on(self.$menuBtn, "click", function(event) {
 				handler();
 			});
