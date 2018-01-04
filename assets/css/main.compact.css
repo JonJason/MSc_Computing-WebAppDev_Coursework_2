@@ -17,6 +17,7 @@ h1 { font-size: 1.75em; }
 
 button { cursor: pointer; }
 
+/*** font awesome hack ***/
 .text-left { text-align: left; }
 
 .text-center { text-align: center; }
@@ -170,6 +171,20 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 .search-panel .search-btn i.search-icon { font-size: 1.35em; }
 
 .search-panel .img-uploader { display: none; }
+
+.search-panel .extra-link-wrapper { margin-top: 1em; font-size: 0.9em; }
+
+.search-panel .extra-link-wrapper .extra-link-item { position: relative; }
+
+.search-panel .extra-link-wrapper .extra-link-item .extra-link { padding-left: 2em; color: #6BB9F0; text-decoration: underline; }
+
+.search-panel .extra-link-wrapper .extra-link-item .extra-link:hover { color: #D68802; }
+
+.search-panel .extra-link-wrapper .extra-link-item .extra-link:before { position: absolute; left: 0; top: 0.2em; }
+
+.search-panel .extra-link-wrapper .extra-link-item .extra-link.WOTD-link:before { font-family: FontAwesome; content: ""; color: #F7CA18; }
+
+.search-panel .extra-link-wrapper .extra-link-item .extra-link.random-word-link:before { font-family: FontAwesome; content: ""; color: #AEA8D3; }
 
 .profile-picture { width: 100%; border-radius: 0.5em; }
 

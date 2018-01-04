@@ -12,6 +12,7 @@
     border-color: $color;
 }
 
+/*** font awesome hack ***/
 @mixin font-awesome($icon) {
     font-family: FontAwesome; // using font awesome icon
     content: $icon; // child icon
@@ -31,4 +32,12 @@
 
 @mixin fa-caret-down {
     @include font-awesome("\f0d7");
+}
+
+@mixin fa-star {
+    @include font-awesome("\f005");
+}
+
+@mixin fa-random {
+    @include font-awesome("\f074");
 }

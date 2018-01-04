@@ -18,7 +18,7 @@ block content
                                 i.search-icon.fa.fa-search
                     .text-center.separator
                         span - or -
-                    p.intro-text upload an Image and to get related words
+                    p.intro-text Upload an Image and to get related words
                     form#img_upload_form
                         .input-wrapper.img-uploader-wrapper
                             input.img-uploader(id="img_upload" type="file")
@@ -26,17 +26,15 @@ block content
                                 i.upload-icon.fa.fa-upload.v-align-middle
                                 span.v-align-middle Choose an Image
                                 span.drop-img-text &nbsp;or Drop your Image Here
-                    p.intro-text You can also look:
-                    .buttons-wrapper
-                        a
-                            i.fa.fa-star
-                            | &nbsp;
-                            strong Word of the Day
-                        br
-                        a
-                            i.fa.fa-random
-                            | &nbsp;
-                            strong Random Word
+                    .extra-link-wrapper
+                        p.intro-text You can also see or try:
+                        ul.extra-link-list
+                            li.extra-link-item
+                                a.extra-link.WOTD-link(href="/word#OTD")
+                                    strong Word of the Day
+                            li.extra-link-item
+                                a.extra-link.random-word-link(href="/word#random")
+                                    strong Random Word
                     
         section#results
             .section-panel

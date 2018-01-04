@@ -106,6 +106,7 @@
         padding-right: 0.7em;
         padding-bottom: 0.3em;
         min-width: 9em;
+
         &:focus {
             outline: none;
         }
@@ -139,6 +140,40 @@
 
     .img-uploader {
         display: none;
+    }
+
+    .extra-link-wrapper {
+        margin-top: 1em;
+        font-size: 0.9em;
+        .extra-link-item {
+            position: relative;
+
+            .extra-link {
+                padding-left: 2em;
+                color: $font-color-4;
+                text-decoration: underline;
+
+                &:hover {
+                    color: $font-color-3;
+                }
+
+                &:before {
+                    position: absolute;
+                    left: 0;
+                    top: 0.2em;
+                }
+
+                &.WOTD-link:before {
+                    @include fa-star();
+                    color: $color-yellow;
+                }
+
+                &.random-word-link:before {
+                    @include fa-random();
+                    color: $color-soft-violet;
+                }
+            }
+        }
     }
 }
 
