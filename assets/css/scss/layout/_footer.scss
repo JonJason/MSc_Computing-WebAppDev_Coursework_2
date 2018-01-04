@@ -1,9 +1,7 @@
 footer {
+    flex: 0;
     height: $footer-height;
     line-height: $footer-height;
-    bottom: 0;
-    left: 0;
-    right: 0;
     background-color: #5F5F5F;
     color: white;
 

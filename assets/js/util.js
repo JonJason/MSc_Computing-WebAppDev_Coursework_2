@@ -28,9 +28,19 @@ var UTIL = (function (UTIL) {
 	 * @param {String} name					- event name
 	 * @param {Function} callback			- function that will be called when the event triggered
 	 */
-	UTIL.$on = function(element, name, callback, useCapture) {
+	UTIL.$on = function(element, name, listener, useCapture) {
 		// !! (double exclamation mark) here convert the value to true or false
-		element.addEventListener(name, callback, !!useCapture);
+		element.addEventListener(name, listener, !!useCapture);
+	};
+
+	/**
+	 * remove event listener from an element
+	 * @param {DOM Element Object} element	- DOM Element Object where we want to add an event listener
+	 * @param {String} name					- event name
+	 * @param {Function} callback			- function that will be called when the event triggered
+	 */
+	UTIL.$off = function(element, name, listener) {
+		element.removeEventListener(name, listener);
 	};
 
 	/**
@@ -178,6 +188,44 @@ var UTIL = (function (UTIL) {
 	 */
 	UTIL.capitalise = function (str) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
+	};
+
+	/**
+	 * Obtain base64 image data from file
+	 * @param {String} file		- file object that is gotten from input file
+	 * @param {String} callback	- callback function after the data obtained
+	 */
+	 UTIL.getDataUri = function(file, callback) {
+		var reader = new FileReader();
+
+		UTIL.$on(reader, "load", function(event) {
+			callback && callback(reader.result.replace(/^data:image\/(.*);base64,/, ''), reader.result);
+		});
+
+		if (!!file) {
+			reader.readAsDataURL(file);
+		}
+	};
+
+	/**
+	 * Obtain base64 image data from file
+	 * @param {String} file		- file object that is gotten from input file
+	 * @param {String} callback	- callback function after the data obtained
+	 */
+	 UTIL.parseTemplate = function(id, data) {
+		 var text = UTIL.qs("#" + id).innerHTML;
+
+		 for (var key in data) {
+		 	if (data.hasOwnProperty(key)) {
+				text = text.replace("{{" + key + "}}", data[key]);
+		 	}
+		 }
+
+		 return text;
+	};
+
+	UTIL.getAspectRatio = function(size) {
+		return size.width/size.height;
 	};
 
 	return UTIL;

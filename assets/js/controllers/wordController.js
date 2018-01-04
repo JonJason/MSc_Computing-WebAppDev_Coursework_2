@@ -16,6 +16,10 @@
 		self.view.bind("triggerSearch", function (searchText) {
 			self.searchForWord(searchText);
 		});
+
+		self.view.bind("fileChosen", function (filepath) {
+			self.showPredictedWords(filepath);
+		});
 	}
 
 	Controller.prototype.lightenSearchbar = function () {
@@ -38,6 +42,22 @@
 			console.log(count);
 		});
     };
+
+	Controller.prototype.showPredictedWords = function (filepath) {
+		var self = this;
+		self.view.render("showPredictionPanel");
+		UTIL.getDataUri(filepath, function (data, fileUrl) {
+			self.view.render("showThumb", {
+				thumb: fileUrl
+			});
+
+			API.clarifai.getPrediction(data, function (predictions) {
+				self.view.render("showPredictionResult", {
+					words: predictions.map(x => x.name)
+				});
+			});
+		});
+	};
 
 	// Export to window
 	window.app = window.app || {};

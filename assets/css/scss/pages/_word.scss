@@ -1,5 +1,9 @@
-.search-panel {
+.search-panel { // search panel
     min-height: calc(100vh - #{$header-height});
+
+    &.hidden {
+        display: none;
+    }
 
     .section-head {
         padding-top: 2em;
@@ -171,6 +175,118 @@
                 &.random-word-link:before {
                     @include fa-random();
                     color: $color-soft-violet;
+                }
+            }
+        }
+    }
+}
+
+.result-panel {
+    display: none;
+
+    &.show {
+        display: block;
+    }
+
+    .control-wrapper {
+        padding: 1em;
+    }
+
+    .prediction-panel {
+        background-color: white;
+        border-radius: $panel-border-radius;
+        overflow: hidden;
+
+        .image-wrapper {
+            background-color: black;
+            position: relative;
+            width: 100%;
+
+            &:before { // pseudo element to retain the aspect ratio
+                display: block;
+                content: "";
+                width: 100%;
+                padding-top: 100%;
+            }
+
+            > .image-container { // image container to control the size of the image
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 1em;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .thumbnail {
+                    display: block;
+
+                    &.fit-height {
+                        height: 100%;
+                    }
+
+                    &.fit-width {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .preloader-overlay {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: rgba(#000, 0.5);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.5em;
+                color: $font-color-1;
+
+                &.show {
+                    display: flex;
+
+                    &:before {
+                        content: attr(data-text);
+                    }
+
+                    &:after { // add dot animation behind the word predicting
+                        content: "";
+                        animation-name: dot-dot;
+                        animation-duration: 1.5s;
+                        animation-timing-function: ease-in-out;
+                        animation-iteration-count: infinite;
+                    }
+                }
+            }
+        }
+
+        .predicted-word-wrapper {
+
+            .list-header {
+                border-bottom: 0.1em solid rgba(black, 0.2);
+                padding: 0 1em;
+                text-align: center;
+            }
+
+            .predicted-word-list {
+                padding: 1em;
+                overflow-y: auto;
+                max-height: 12em;
+
+                .predicted-word {
+                    display: block;
+                    width: 100%;
+                    background-color: transparent;
+                    border-style: none;
+                    border-bottom: 0.1em solid rgba(black, 0.2);
+                    height:3em;
+                    text-align: left;
+                    font-weight: bold;
                 }
             }
         }

@@ -3,11 +3,15 @@
   50% { transform: translateX(-40%); }
   100% { transform: translateX(0%); } }
 
+@keyframes dot-dot { 0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+  100% { content: ""; } }
+
 * { box-sizing: border-box; }
 
-body { margin: 0; min-width: 18em; font-family: sans-serif; }
-
-main { margin-top: 3.75em; }
+body { margin: 0; min-width: 18em; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
 
 a { display: inline-block; text-decoration: none; }
 
@@ -32,7 +36,7 @@ button { cursor: pointer; }
 
 .no-scroll-y { overflow-y: hidden; }
 
-header { position: fixed; top: 0; height: 3.75em; width: 100%; background-color: #00396C; z-index: 1000; }
+header { position: relative; flex: 0 0 auto; height: 3.75em; width: 100%; background-color: #00396C; z-index: 1000; }
 
 .brand { position: absolute; left: 0; top: 0; bottom: 0; }
 
@@ -70,7 +74,9 @@ nav { position: absolute; right: 0; bottom: 0; top: 0; display: flex; align-item
 
 .nav-item .dropdown .dropdown-link { font-size: 1.1em; display: block; padding: 0.8em 1.8em; }
 
-footer { height: 2em; line-height: 2em; bottom: 0; left: 0; right: 0; background-color: #5F5F5F; color: white; }
+.page-wrapper { flex: 1 1 auto; overflow-y: auto; }
+
+footer { flex: 0; height: 2em; line-height: 2em; left: 0; right: 0; background-color: #5F5F5F; color: white; }
 
 footer .rj-copyright { padding-left: 1em; vertical-align: middle; font-size: 0.8em; }
 
@@ -121,6 +127,8 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 .hero-image-wrapper .hero-image-content .intro-text { padding-bottom: 3em; }
 
 .search-panel { min-height: calc(100vh - 3.75em); }
+
+.search-panel.hidden { display: none; }
 
 .search-panel .section-head { padding-top: 2em; padding-bottom: 1em; }
 
@@ -185,6 +193,40 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 .search-panel .extra-link-wrapper .extra-link-item .extra-link.WOTD-link:before { font-family: FontAwesome; content: ""; color: #F7CA18; }
 
 .search-panel .extra-link-wrapper .extra-link-item .extra-link.random-word-link:before { font-family: FontAwesome; content: ""; color: #AEA8D3; }
+
+.result-panel { display: none; }
+
+.result-panel.show { display: block; }
+
+.result-panel .control-wrapper { padding: 1em; }
+
+.result-panel .prediction-panel { background-color: white; border-radius: 0.5em; overflow: hidden; }
+
+.result-panel .prediction-panel .image-wrapper { background-color: black; position: relative; width: 100%; }
+
+.result-panel .prediction-panel .image-wrapper:before { display: block; content: ""; width: 100%; padding-top: 100%; }
+
+.result-panel .prediction-panel .image-wrapper > .image-container { position: absolute; top: 0; left: 0; right: 0; bottom: 0; padding: 1em; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+.result-panel .prediction-panel .image-wrapper > .image-container .thumbnail { display: block; }
+
+.result-panel .prediction-panel .image-wrapper > .image-container .thumbnail.fit-height { height: 100%; }
+
+.result-panel .prediction-panel .image-wrapper > .image-container .thumbnail.fit-width { width: 100%; }
+
+.result-panel .prediction-panel .image-wrapper .preloader-overlay { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.5); display: none; justify-content: center; align-items: center; font-size: 1.5em; color: #AAD7FF; }
+
+.result-panel .prediction-panel .image-wrapper .preloader-overlay.show { display: flex; }
+
+.result-panel .prediction-panel .image-wrapper .preloader-overlay.show:before { content: attr(data-text); }
+
+.result-panel .prediction-panel .image-wrapper .preloader-overlay.show:after { content: ""; animation-name: dot-dot; animation-duration: 1.5s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+
+.result-panel .prediction-panel .predicted-word-wrapper .list-header { border-bottom: 0.1em solid rgba(0, 0, 0, 0.2); padding: 0 1em; text-align: center; }
+
+.result-panel .prediction-panel .predicted-word-wrapper .predicted-word-list { padding: 1em; overflow-y: auto; max-height: 12em; }
+
+.result-panel .prediction-panel .predicted-word-wrapper .predicted-word-list .predicted-word { display: block; width: 100%; background-color: transparent; border-style: none; border-bottom: 0.1em solid rgba(0, 0, 0, 0.2); height: 3em; text-align: left; font-weight: bold; }
 
 .profile-picture { width: 100%; border-radius: 0.5em; }
 

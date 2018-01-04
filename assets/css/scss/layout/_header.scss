@@ -1,6 +1,6 @@
 header { // horizontal bar on top of the page
-    position: fixed;
-    top: 0;
+    position: relative;
+    flex: 0 0 auto;
     height: $header-height;
     width: 100%;
     background-color: $bg-color-1;

@@ -96,7 +96,7 @@ var API = (function(parent){
     };
 
 
-    parent.wordnik = new api()
+    parent.wordnik = new api();
 
 	return parent;
 })(API || {});

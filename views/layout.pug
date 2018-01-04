@@ -28,8 +28,9 @@ html
     body(data-page=page)
         
         include includes/header.pug
-        block content
-        include includes/footer.pug
+        .page-wrapper
+            block content
+            include includes/footer.pug
         .page-overlay
         script(src="assets/js/util.js")
         script(src="assets/js/views/layout.js")

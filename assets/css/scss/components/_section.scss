@@ -17,12 +17,12 @@
 
 section {
     &:nth-child(odd) .section-panel {
-        background-color: #353537;
+        background-color: $bg-color-3;
         color: #FFFFFF;
     }
 
     &:nth-child(even) .section-panel {
-        background-color: #F7F7F7;
+        background-color: $bg-color-4;
         color: #0E0E0F;
     }
 
