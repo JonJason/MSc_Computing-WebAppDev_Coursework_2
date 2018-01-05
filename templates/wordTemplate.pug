@@ -1,4 +1,38 @@
 script#predicted_word_item(type="text/template")
     li
         //- use button to get built-in highlighting effect when clicked
-        button.predicted-word {{word}}
+        button.predicted-word(data-word="{{word}}") {{word}}
+
+script#word_item(type="text/template")
+    li(id="word_{{id}}")
+        .word-wrapper
+            .word-header
+                h1.header-text {{word}}
+                .audio-wrapper
+                    .audio-container
+            .word-content
+                .definition-wrapper
+                    h4.definition-header definitions
+                    ul.word-definition-list
+                .example-wrapper
+                    h4.example-header examples
+                    ol.word-example-list
+                .phrase-wrapper
+                    h4.phrase-header phrases
+                    ul.word-phrase-list
+
+script#word_definition_item(type="text/template")
+    li
+        h5 {{partOfSpeech}}
+        p {{text}}
+script#word_audio_item(type="text/template")
+    audio
+        source(src="{{url}}" type="audio/mpeg")
+script#word_phrase_item(type="text/template")
+    li.word-phrase-item
+        button.word-phrase
+            strong {{phrase}}
+
+script#word_example_item(type="text/template")
+    li
+        p {{text}}

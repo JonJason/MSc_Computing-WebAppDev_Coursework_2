@@ -193,9 +193,15 @@
     }
 
     .prediction-panel {
+        display: none;
         background-color: white;
         border-radius: $panel-border-radius;
         overflow: hidden;
+        box-shadow: 0 0.3em 0.5em;
+
+        &.show {
+            display: block;
+        }
 
         .image-wrapper {
             background-color: black;
@@ -256,10 +262,7 @@
 
                     &:after { // add dot animation behind the word predicting
                         content: "";
-                        animation-name: dot-dot;
-                        animation-duration: 1.5s;
-                        animation-timing-function: ease-in-out;
-                        animation-iteration-count: infinite;
+                        animation: dot-dot 1.5s ease-in-out infinite;
                     }
                 }
             }
@@ -277,6 +280,8 @@
                 padding: 1em;
                 overflow-y: auto;
                 max-height: 12em;
+                padding-bottom: 0em; //
+                margin-bottom: 1em; // this is just a hack to prevent scrollbar going to far down to the round corner
 
                 .predicted-word {
                     display: block;
@@ -284,9 +289,116 @@
                     background-color: transparent;
                     border-style: none;
                     border-bottom: 0.1em solid rgba(black, 0.2);
-                    height:3em;
+                    height: 3em;
                     text-align: left;
                     font-weight: bold;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+
+    .word-wrapper {
+        background-color: $bg-color-5;
+        border-radius: $panel-border-radius;
+        margin-bottom: 2em;
+
+        .word-header {
+            padding: 0.5em 0.8em;
+            display: flex;
+            align-items: flex-end;
+            font-size: 1.2em;
+            border-bottom: 0.1em solid rgba(black, 0.3);
+
+            .header-text {
+                margin: 0;
+                text-transform: capitalize;
+            }
+
+            .audio-wrapper {
+                display: inline-block;
+                margin-bottom: 0.3em;
+                margin-left: 0.5em;
+                color: $font-color-5;
+                cursor: pointer;
+
+                &:after {
+                    @include fa-volume-up();
+                }
+
+                &.speaking:after {
+                    animation: speaking 1.5s linear infinite;
+                }
+            }
+        }
+
+        .word-content {
+            padding-top: 1em;
+
+            h4 {
+                margin: 0.5em 0;
+            }
+
+            h5 {
+                margin-top: 1em;
+                margin-bottom: 0
+            }
+
+            p {
+                margin-top: 0.2em;
+                margin-bottom: 0;
+            }
+
+            .definition-wrapper {
+                .definition-header {
+                    padding: 0 1em;
+                }
+
+                .word-definition-list {
+                    padding: 0 1em;
+                    max-height: 10em;
+                    overflow-y: auto;
+                }
+            }
+
+            .example-wrapper {
+                padding-left: 1em;
+
+                .word-example-list {
+                    padding: 0 1em;
+                    max-height: 10em;
+                    overflow-y: auto;
+
+                    p {
+                        padding-bottom: 0.5em
+                    }
+                }
+            }
+
+            .phrase-wrapper {
+                padding: 0 1em;
+
+                .word-phrase-list {
+                    display: flex;
+                    align-items: center;
+                    overflow-x: auto;
+                    padding-bottom: 1em; // make space for scrollbar
+
+                    .word-phrase-item {
+
+                        &:not(:last-child) {
+                            margin-right: 1em;
+                        }
+
+                        .word-phrase {
+                            white-space: nowrap;
+                            height: 3em;
+                            border-radius: $btn-border-radius;
+                            padding: 0 1em;
+                            border-style: none;
+                            background-color: $bg-color-6;
+                        }
+                    }
                 }
             }
         }

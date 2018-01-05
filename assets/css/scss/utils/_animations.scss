@@ -11,3 +11,10 @@
     75%     { content: "..."; }
     100%    { content: ""; }
 }
+
+@keyframes speaking {
+    0%      { @include fa-volume-off; }
+    33.33%     { @include fa-volume-down; }
+    66.67%     { @include fa-volume-up; }
+    100%    { @include fa-volume-off; }
+}

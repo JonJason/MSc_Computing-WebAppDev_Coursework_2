@@ -163,10 +163,7 @@ nav {
                 color: $font-color-3;
 
                 // make the arrow move back and forth
-                animation-name: back-and-forth;
-                animation-duration: 0.6s;
-                animation-timing-function: ease-in-out;
-                animation-iteration-count: infinite;
+                animation: back-and-forth 0.6s ease-in-out infinite;
             }
 
         }

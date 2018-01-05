@@ -1,14 +1,5 @@
 @charset "UTF-8";
-@keyframes back-and-forth { 0% { transform: translateX(0%); }
-  50% { transform: translateX(-40%); }
-  100% { transform: translateX(0%); } }
-
-@keyframes dot-dot { 0% { content: ""; }
-  25% { content: "."; }
-  50% { content: ".."; }
-  75% { content: "..."; }
-  100% { content: ""; } }
-
+/*** font awesome hack ***/
 * { box-sizing: border-box; }
 
 body { margin: 0; min-width: 18em; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
@@ -21,7 +12,25 @@ h1 { font-size: 1.75em; }
 
 button { cursor: pointer; }
 
-/*** font awesome hack ***/
+@keyframes back-and-forth { 0% { transform: translateX(0%); }
+  50% { transform: translateX(-40%); }
+  100% { transform: translateX(0%); } }
+
+@keyframes dot-dot { 0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+  100% { content: ""; } }
+
+@keyframes speaking { 0% { font-family: FontAwesome;
+    content: ""; }
+  33.33% { font-family: FontAwesome;
+    content: ""; }
+  66.67% { font-family: FontAwesome;
+    content: ""; }
+  100% { font-family: FontAwesome;
+    content: ""; } }
+
 .text-left { text-align: left; }
 
 .text-center { text-align: center; }
@@ -76,11 +85,11 @@ nav { position: absolute; right: 0; bottom: 0; top: 0; display: flex; align-item
 
 .page-wrapper { flex: 1 1 auto; overflow-y: auto; }
 
-footer { flex: 0; height: 2em; line-height: 2em; left: 0; right: 0; background-color: #5F5F5F; color: white; }
+footer { flex: 0; height: 2em; line-height: 2em; background-color: #5F5F5F; color: white; }
 
 footer .rj-copyright { padding-left: 1em; vertical-align: middle; font-size: 0.8em; }
 
-.section-panel { margin: 0; padding-left: 1em; padding-right: 1em; font-family: calibri; }
+.section-panel { margin: 0; padding-left: 1.5em; padding-right: 1.5em; font-family: calibri; }
 
 .section-panel .section-content > * { padding-bottom: 1.5em; }
 
@@ -93,10 +102,6 @@ section:nth-child(even) .section-panel { background-color: #F7F7F7; color: #0E0E
 section .section-head { text-align: center; padding: 1em 0 0.25em 0; }
 
 section .section-head > h1 { margin: 0; }
-
-.small-btn { padding: 5px; }
-
-.small-btn:hover { background-color: white; color: black; }
 
 button.ec-button { height: 3em; padding: 0 1.125em; border-radius: 0.25em; border-style: solid; background-color: transparent; transition: color 0.5s, border-color 0.5s; }
 
@@ -116,7 +121,7 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .page-overlay.show { z-index: 500; opacity: 1; }
 
-.hero-image-wrapper { background-color: #3B598C; padding-bottom: 3em; min-height: 100vh; margin: 0; padding-left: 1em; padding-right: 1em; color: white; }
+.hero-image-wrapper { background-color: #3B598C; padding-bottom: 3em; min-height: 100vh; margin: 0; padding-left: 1.5em; padding-right: 1.5em; color: white; }
 
 .hero-image-wrapper .hero-image-content { max-width: 47.5em; margin: auto; }
 
@@ -200,7 +205,9 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel .control-wrapper { padding: 1em; }
 
-.result-panel .prediction-panel { background-color: white; border-radius: 0.5em; overflow: hidden; }
+.result-panel .prediction-panel { display: none; background-color: white; border-radius: 0.5em; overflow: hidden; box-shadow: 0 0.3em 0.5em; }
+
+.result-panel .prediction-panel.show { display: block; }
 
 .result-panel .prediction-panel .image-wrapper { background-color: black; position: relative; width: 100%; }
 
@@ -220,13 +227,51 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel .prediction-panel .image-wrapper .preloader-overlay.show:before { content: attr(data-text); }
 
-.result-panel .prediction-panel .image-wrapper .preloader-overlay.show:after { content: ""; animation-name: dot-dot; animation-duration: 1.5s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.result-panel .prediction-panel .image-wrapper .preloader-overlay.show:after { content: ""; animation: dot-dot 1.5s ease-in-out infinite; }
 
 .result-panel .prediction-panel .predicted-word-wrapper .list-header { border-bottom: 0.1em solid rgba(0, 0, 0, 0.2); padding: 0 1em; text-align: center; }
 
-.result-panel .prediction-panel .predicted-word-wrapper .predicted-word-list { padding: 1em; overflow-y: auto; max-height: 12em; }
+.result-panel .prediction-panel .predicted-word-wrapper .predicted-word-list { padding: 1em; overflow-y: auto; max-height: 12em; padding-bottom: 0em; margin-bottom: 1em; }
 
-.result-panel .prediction-panel .predicted-word-wrapper .predicted-word-list .predicted-word { display: block; width: 100%; background-color: transparent; border-style: none; border-bottom: 0.1em solid rgba(0, 0, 0, 0.2); height: 3em; text-align: left; font-weight: bold; }
+.result-panel .prediction-panel .predicted-word-wrapper .predicted-word-list .predicted-word { display: block; width: 100%; background-color: transparent; border-style: none; border-bottom: 0.1em solid rgba(0, 0, 0, 0.2); height: 3em; text-align: left; font-weight: bold; text-transform: capitalize; }
+
+.result-panel .word-wrapper { background-color: #FFD9A4; border-radius: 0.5em; margin-bottom: 2em; }
+
+.result-panel .word-wrapper .word-header { padding: 0.5em 0.8em; display: flex; align-items: flex-end; font-size: 1.2em; border-bottom: 0.1em solid rgba(0, 0, 0, 0.3); }
+
+.result-panel .word-wrapper .word-header .header-text { margin: 0; text-transform: capitalize; }
+
+.result-panel .word-wrapper .word-header .audio-wrapper { display: inline-block; margin-bottom: 0.3em; margin-left: 0.5em; color: #00008B; cursor: pointer; }
+
+.result-panel .word-wrapper .word-header .audio-wrapper:after { font-family: FontAwesome; content: ""; }
+
+.result-panel .word-wrapper .word-header .audio-wrapper.speaking:after { animation: speaking 1.5s linear infinite; }
+
+.result-panel .word-wrapper .word-content { padding-top: 1em; }
+
+.result-panel .word-wrapper .word-content h4 { margin: 0.5em 0; }
+
+.result-panel .word-wrapper .word-content h5 { margin-top: 1em; margin-bottom: 0; }
+
+.result-panel .word-wrapper .word-content p { margin-top: 0.2em; margin-bottom: 0; }
+
+.result-panel .word-wrapper .word-content .definition-wrapper .definition-header { padding: 0 1em; }
+
+.result-panel .word-wrapper .word-content .definition-wrapper .word-definition-list { padding: 0 1em; max-height: 10em; overflow-y: auto; }
+
+.result-panel .word-wrapper .word-content .example-wrapper { padding-left: 1em; }
+
+.result-panel .word-wrapper .word-content .example-wrapper .word-example-list { padding: 0 1em; max-height: 10em; overflow-y: auto; }
+
+.result-panel .word-wrapper .word-content .example-wrapper .word-example-list p { padding-bottom: 0.5em; }
+
+.result-panel .word-wrapper .word-content .phrase-wrapper { padding: 0 1em; }
+
+.result-panel .word-wrapper .word-content .phrase-wrapper .word-phrase-list { display: flex; align-items: center; overflow-x: auto; padding-bottom: 1em; }
+
+.result-panel .word-wrapper .word-content .phrase-wrapper .word-phrase-list .word-phrase-item:not(:last-child) { margin-right: 1em; }
+
+.result-panel .word-wrapper .word-content .phrase-wrapper .word-phrase-list .word-phrase-item .word-phrase { white-space: nowrap; height: 3em; border-radius: 0.25em; padding: 0 1em; border-style: none; background-color: #FFC470; }
 
 .profile-picture { width: 100%; border-radius: 0.5em; }
 
@@ -242,7 +287,7 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
   .nav-item.has-dropdown .nav-link:after { font-family: FontAwesome; content: ""; }
   .nav-item.has-dropdown:hover .nav-link:after { font-family: FontAwesome; content: ""; }
   .nav-item.has-dropdown:hover .dropdown { pointer-events: auto; top: 3.85em; opacity: 1; }
-  .nav-item:hover .nav-link:not(.ongoing-page):before { font-family: FontAwesome; content: ""; position: absolute; left: 0.3em; color: #D68802; animation-name: back-and-forth; animation-duration: 0.6s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+  .nav-item:hover .nav-link:not(.ongoing-page):before { font-family: FontAwesome; content: ""; position: absolute; left: 0.3em; color: #D68802; animation: back-and-forth 0.6s ease-in-out infinite; }
   .nav-item .dropdown .dropdown-item:not(:last-child) { border-bottom: 0.1em solid #292929; }
   .nav-item .dropdown .dropdown-link { padding: 1em !important; }
   .dropdown { pointer-events: none; display: block; position: absolute; top: 3.25em; right: 50%; transform: translateX(50%); background-color: #89D0FF; opacity: 0; transition: opacity 0.3s, top 0.3s; }

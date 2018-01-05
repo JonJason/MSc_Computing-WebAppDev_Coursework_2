@@ -1,12 +1,12 @@
 // main scss file
-// base style
+// base style and mixin
 @import 'base/variables';
 @import 'base/colors';
-@import "base/animations";
+@import 'utils/mixin';
 @import 'base/reset';
 
 // utilities
-@import 'utils/mixin';
+@import 'utils/animations';
 @import 'utils/helper';
 
 // layout style

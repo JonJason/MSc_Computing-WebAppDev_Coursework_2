@@ -214,19 +214,34 @@ var UTIL = (function (UTIL) {
 	 */
 	 UTIL.parseTemplate = function(id, data) {
 		 var text = UTIL.qs("#" + id).innerHTML;
-
 		 for (var key in data) {
 		 	if (data.hasOwnProperty(key)) {
-				text = text.replace("{{" + key + "}}", data[key]);
+				// replace all occurences by using regular expression with global modifier in the search keyword
+				text = text.replace(new RegExp("{{" + key + "}}", "g"), data[key]);
 		 	}
 		 }
 
 		 return text;
 	};
 
+	// get aspect ratio of object which has width and height
 	UTIL.getAspectRatio = function(size) {
 		return size.width/size.height;
 	};
 
+	// I copied this function from the url below.
+	// https://stackoverflow.com/questions/3662821/how-to-correctly-use-innerhtml-to-create-an-element-with-possible-children-fro
+	UTIL.createElement = function (str) {
+		// creates an imaginary Node Object
+	    var frag = document.createDocumentFragment();
+
+	    var elem = document.createElement('div');
+	    elem.innerHTML = str;
+
+	    while (elem.childNodes[0]) {
+	        frag.appendChild(elem.childNodes[0]);
+	    }
+	    return frag;
+	}
 	return UTIL;
 })(UTIL || {});

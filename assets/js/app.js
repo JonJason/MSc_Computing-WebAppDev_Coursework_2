@@ -16,7 +16,7 @@
 		 */
 		 Word: function () {
 		 	this.view = new app.WordView();
-			this.controller = new app.wordController(this.view);
+			this.controller = new app.WordController(this.view);
 		 },
 
 		/**

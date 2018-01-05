@@ -19,7 +19,9 @@
 		this.$predictionPanel = UTIL.qs(".prediction-panel", this.$resultPanel);
 		this.$thumb = UTIL.qs(".thumbnail", this.$predictionPanel);
 		this.$preloader = UTIL.qs(".preloader-overlay", this.$predictionPanel);
-		this.$predictedWordList = UTIL.qs(".predicted-word-list", this.$predictionPanel)
+		this.$predictedWordList = UTIL.qs(".predicted-word-list", this.$predictionPanel);
+		this.$resultWrapper = UTIL.qs(".result-wrapper", this.$resultPanel);
+		this.$wordList = UTIL.qs(".word-list", this.$resultWrapper);
 	};
 
     /**
@@ -56,6 +58,10 @@
 			UTIL.$on(self.$imageUploader, "change", function(event) {
 				handler(self.$imageUploader.files[0]);
 			});
+		} else if (event === "predictionWordPicked") {
+			UTIL.$delegate(self.$predictedWordList, ".predicted-word", "click", function(event, currentTarget) {
+				handler(currentTarget.dataset.word);
+			});
 		};
 	};
 
@@ -70,9 +76,18 @@
 				self._darkenSearchbar();
 			},
 
-			showPredictionPanel: function () {
+			showResultPanel: function() {
 				self._hideSearchPanel();
 				self._showResultPanel();
+			},
+
+			showSearchPanel: function() {
+				self._showSearchPanel();
+				self._hideResultPanel();
+			},
+
+			showPredictionPanel: function () {
+				self._showPredictionPanel();
 				self._showThumbPreloader("Loading");
 			},
 
@@ -84,6 +99,14 @@
 			showPredictionResult: function () {
 				self._hideThumbPreloader();
 				self._showPredictedWords(parameter.words);
+			},
+
+			addWord: function () {
+				self._addWordItem(parameter);
+			},
+
+			updateWord: function () {
+				self._updateWordItem(parameter.id, parameter.key, parameter.value);
 			}
 		};
 
@@ -94,7 +117,7 @@
 		UTIL.$addClass(this.$searchbarWrapper, "active");
 	};
 
-	View.prototype._darkerSearchbar = function() {
+	View.prototype._darkenSearchbar = function() {
 		UTIL.$removeClass(this.$searchbarWrapper, "active");
 	};
 
@@ -112,6 +135,14 @@
 
 	View.prototype._hideResultPanel = function() {
 		UTIL.$removeClass(this.$resultPanel, "show");
+	};
+
+	View.prototype._showPredictionPanel = function() {
+		UTIL.$addClass(this.$predictionPanel, "show")
+	};
+
+	View.prototype._hidePredictionPanel = function() {
+		UTIL.$removeClass(this.$predictionPanel, "show")
 	};
 
 	View.prototype._showThumbPreloader = function(text) {
@@ -153,6 +184,34 @@
 		}
 
 		this.$predictedWordList.innerHTML = list;
+	};
+
+	View.prototype._addWordItem = function(data) {
+		var wordItem = UTIL.createElement(UTIL.parseTemplate("word_item", data));
+		this.$wordList.appendChild(wordItem);
+	};
+
+	View.prototype._updateWordItem = function(id, key, value) {
+		var wordItem = UTIL.qs("#word_" + id, this.$wordList);
+		var classNames = {
+			audios: "audio-container",
+			definitions: "word-definition-list",
+			phrases: "word-phrase-list",
+			examples: "word-example-list"
+		};
+
+		var templates = {
+			audios: "word_audio_item",
+			definitions: "word_definition_item",
+			phrases: "word_phrase_item",
+			examples: "word_example_item"
+		};
+
+		var parent = UTIL.qs("." + classNames[key], wordItem);
+		for (var data of value) {
+			var child = UTIL.createElement(UTIL.parseTemplate(templates[key], data));
+			parent.appendChild(child);
+		}
 	};
 
 	// Export to window

@@ -4,7 +4,7 @@
 }
 
 @mixin body-side-gutter() {
-    @include side-gutter(1em);
+    @include side-gutter(1.5em);
 }
 
 @mixin ec-button-color($color) {
@@ -40,4 +40,16 @@
 
 @mixin fa-random {
     @include font-awesome("\f074");
+}
+
+@mixin fa-volume-off {
+    @include font-awesome("\f026");
+}
+
+@mixin fa-volume-up {
+    @include font-awesome("\f028");
+}
+
+@mixin fa-volume-down {
+    @include font-awesome("\f027");
 }
