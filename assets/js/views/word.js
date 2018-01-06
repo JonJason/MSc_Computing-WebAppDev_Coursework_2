@@ -215,6 +215,12 @@
 
 		if (key == "audios") { // bind pronounce event
 			var audioWrapper = parent.parentElement;
+
+			if (value.length < 1) { // if there is no pronunciation found, hide the speaker icon
+				UTIL.$addClass(audioWrapper, "no-audio");
+				return;
+			}
+
 			parent.dataset.index = 0;
 			var pronounce = function() {
 				var audioContainer = audioWrapper.children[0];

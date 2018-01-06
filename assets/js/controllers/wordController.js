@@ -89,53 +89,20 @@
 	Controller.prototype._fetchWordData = function(model) {
 		var self = this;
 		var word = model.get("word");
+
+		// callback function for each property fetching
 		var callback = function(name, value) {
 			var data = {};
 			data[name] = value;
 			model.set(data);
-			self.view.render("updateWord", {
-				id: model.get("id"),
-				key: "name",
-				value: model.get("name")
-			});
+			self.view.render("updateWord", { id: model.get("id"), key: name, value: model.get(name) });
 		};
 
-		API.wordnik.getWordDefinitions(word, function(definitions) {
-			// callback("definitions", definitions);
-			model.set({ definitions: definitions });
-			self.view.render("updateWord", {
-				id: model.get("id"),
-				key: "definitions",
-				value: model.get("definitions")
-			});
-		});
-
-		API.wordnik.getWordPhrases(word, function(phrases) {
-			model.set({ phrases: phrases });
-			self.view.render("updateWord", {
-				id: model.get("id"),
-				key: "phrases",
-				value: model.get("phrases")
-			});
-		});
-
-		API.wordnik.getWordAudios(word, function(audios) {
-			model.set({ audios: audios });
-			self.view.render("updateWord", {
-				id: model.get("id"),
-				key: "audios",
-				value: model.get("audios")
-			});
-		});
-
-		API.wordnik.getWordExamples(word, function(examples) {
-			model.set({ examples: examples });
-			self.view.render("updateWord", {
-				id: model.get("id"),
-				key: "examples",
-				value: model.get("examples")
-			});
-		});
+		// fetching definitions, phrases, audios, and examples
+		API.wordnik.getWordDefinitions(word, function(definitions) { callback("definitions", definitions); });
+		API.wordnik.getWordPhrases(word, function(phrases) { callback("phrases", phrases); });
+		API.wordnik.getWordAudios(word, function(audios) { callback("audios", audios); });
+		API.wordnik.getWordExamples(word, function(examples) { callback("examples", examples); });
 	};
 
 	// Export to window

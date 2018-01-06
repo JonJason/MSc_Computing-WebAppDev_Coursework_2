@@ -243,9 +243,13 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel .word-wrapper .word-header .audio-wrapper { display: inline-block; margin-bottom: 0.3em; margin-left: 0.5em; color: #00008B; cursor: pointer; }
 
+.result-panel .word-wrapper .word-header .audio-wrapper.no-audio { display: none; }
+
 .result-panel .word-wrapper .word-header .audio-wrapper:after { font-family: FontAwesome; content: ""; }
 
-.result-panel .word-wrapper .word-header .audio-wrapper.speaking:after { animation: speaking 1.5s linear infinite; }
+.result-panel .word-wrapper .word-header .audio-wrapper.speaking { color: #D68802; }
+
+.result-panel .word-wrapper .word-header .audio-wrapper.speaking:after { animation: speaking 1s linear infinite; }
 
 .result-panel .word-wrapper .word-content { padding-top: 1em; }
 

@@ -322,12 +322,20 @@
                 color: $font-color-5;
                 cursor: pointer;
 
+                &.no-audio {
+                    display: none;
+                }
+
                 &:after {
                     @include fa-volume-up();
                 }
 
-                &.speaking:after {
-                    animation: speaking 1.5s linear infinite;
+                &.speaking {
+                    color: $font-color-3;
+
+                    &:after {
+                        animation: speaking 1s linear infinite;
+                    }
                 }
             }
         }
