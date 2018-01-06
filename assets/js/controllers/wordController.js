@@ -32,6 +32,19 @@
 			self.collapsePredictedWord();
 			self.searchForWord(word);
 		});
+
+		var handleHash = function () {
+			var hash = document.location.hash.slice(1);
+			if (hash == "OTD") {
+				self.fetchWordOfTheDay();
+			} else if (hash == "random") {
+				self.searchRandomWord();
+			}
+		};
+
+		UTIL.$on(window, 'hashchange', handleHash);
+
+		handleHash();
 	}
 
 	Controller.prototype.lightenSearchbar = function () {
@@ -50,16 +63,37 @@
 			return;
 		}
 
-		API.wordnik.searchForWord(searchText, function(results) {
-			self.view.render("showResultPanel");
-			// only take first result, just in case
-			// the api unexpectedly return more than one similar word
-			var result = results[0];
+		API.wordnik.searchForWord(searchText, function(result) {
 			if (!!result) {
-				self.addResult(result.word);
+				self.view.render("showResultPanel");
+				self.addResult({ word: result.word });
+			} else {
+				// HANDLE
+				console.log("word not found");
 			}
 		});
     };
+
+	Controller.prototype.searchRandomWord = function () {
+		var self = this;
+		API.wordnik.getRandomWord(function (result) {
+			if (!!result) {
+				self.view.render("showResultPanel");
+				self.addResult({ word: result.word });
+			}
+		});
+	};
+
+	Controller.prototype.fetchWordOfTheDay = function () {
+		var self = this;
+		API.wordnik.getWOTD(function (data) {
+			if (!!data) {
+				data.isWOTD = true;
+				self.view.render("showResultPanel");
+				self.addResult(data);
+			}
+		});
+	};
 
 	Controller.prototype.showPredictedWords = function (filepath) {
 		var self = this;
@@ -87,11 +121,11 @@
 		this.view.render("collapsePredictedWord");
 	}
 
-	Controller.prototype.addResult = function (word) {
-		var model = this.collections.word.findByWord(word);
+	Controller.prototype.addResult = function (data) {
+		var model = this.collections.word.findByWord(data.word);
 		var isFirst = this.collections.word.count() == 0;
 		if (model === undefined) {
-			model = new app.WordModel({ word: word });
+			model = new app.WordModel(data);
 			this.collections.word.add(model);
 			this.view.render("addWord", {
 				id: model.get("id"),
@@ -119,10 +153,30 @@
 		};
 
 		// fetching definitions, phrases, audios, and examples
-		API.wordnik.getWordDefinitions(word, function(definitions) { callback("definitions", definitions); });
-		API.wordnik.getWordPhrases(word, function(phrases) { callback("phrases", phrases); });
-		API.wordnik.getWordAudios(word, function(audios) { callback("audios", audios); });
-		API.wordnik.getWordExamples(word, function(examples) { callback("examples", examples); });
+		if (model.get("definitions").length >= 1) {
+			callback("definitions", model.get("definitions"));
+		} else {
+			API.wordnik.getWordDefinitions(word, function(definitions) { callback("definitions", definitions); });
+		}
+
+		if (model.get("phrases").length >= 1) {
+			callback("phrases", model.get("phrases"));
+		} else {
+			API.wordnik.getWordPhrases(word, function(phrases) { callback("phrases", phrases); });
+		}
+
+		if (model.get("audios").length >= 1) {
+			callback("audios", model.get("audios"));
+		} else {
+			API.wordnik.getWordAudios(word, function(audios) { callback("audios", audios); });
+		}
+
+		if (model.get("examples").length >= 1) {
+			callback("examples", model.get("examples"));
+		} else {
+			API.wordnik.getWordExamples(word, function(examples) { callback("examples", examples); });
+		}
+
 	};
 
 	// Export to window

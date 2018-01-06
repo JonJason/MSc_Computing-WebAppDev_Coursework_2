@@ -10,11 +10,14 @@
 
         // I use null value for property which doesn't have a default value
         this.id = null;
-        this.word = "";
+        this.word = null;
         this.definitions = [];
         this.phrases = [];
         this.audios = [];
-        this.examples = []
+        this.examples = [];
+		this.isWOTD = false;
+		this.note = "";
+
         this.set(data);
 	}
 

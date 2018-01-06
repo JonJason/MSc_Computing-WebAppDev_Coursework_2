@@ -327,6 +327,14 @@
 		}
 	};
 
+	View.prototype.getWordItem = function (id) {
+		return UTIL.qs("#word_" + id, this.$wordList);
+	};
+
+	View.prototype.getPredictedWordListHeader = function (id) {
+		return this.$predictedWordListHeader;
+	};
+
 	// Export to window
 	window.app = window.app || {};
 	window.app.WordView = View;
