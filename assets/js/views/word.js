@@ -4,6 +4,8 @@
 	function View(template) {
 		this.ENTER_KEY = 13;
 
+		this.eventListener = {}; // to hold temporary eventListener
+
 		/* search-panel */
 		this.$searchPanel = UTIL.qs(".search-panel");
 		// search
@@ -16,10 +18,18 @@
 
 		/* result-panel */
 		this.$resultPanel = UTIL.qs(".result-panel");
-		this.$predictionPanel = UTIL.qs(".prediction-panel", this.$resultPanel);
-		this.$thumb = UTIL.qs(".thumbnail", this.$predictionPanel);
+
+		// control wrapper
+		this.$controlWrapper = UTIL.qs(".control-wrapper", this.$resultPanel);
+		this.$predictionPanel = UTIL.qs(".prediction-panel", this.$controlWrapper);
+		this.$imageWrapper = UTIL.qs(".image-wrapper", this.$predictionPanel);
+		this.$thumb = UTIL.qs(".thumbnail", this.$imageWrapper);
 		this.$preloader = UTIL.qs(".preloader-overlay", this.$predictionPanel);
-		this.$predictedWordList = UTIL.qs(".predicted-word-list", this.$predictionPanel);
+		this.$predictedWordWrapper = UTIL.qs(".predicted-word-wrapper", this.$predictionPanel);
+		this.$predictedWordListHeader = UTIL.qs(".list-header", this.$predictedWordWrapper);
+		this.$predictedWordList = UTIL.qs(".predicted-word-list", this.$predictedWordWrapper);
+
+		// result wrapper
 		this.$resultWrapper = UTIL.qs(".result-wrapper", this.$resultPanel);
 		this.$wordList = UTIL.qs(".word-list", this.$resultWrapper);
 	};
@@ -60,7 +70,7 @@
 			});
 		} else if (event === "predictionWordPicked") {
 			UTIL.$delegate(self.$predictedWordList, ".predicted-word", "click", function(event, currentTarget) {
-				handler(currentTarget.dataset.word);
+				handler(currentTarget.dataset.word, self._isPredictedWordCollapsible());
 			});
 		};
 	};
@@ -107,6 +117,19 @@
 
 			updateWord: function () {
 				self._updateWordItem(parameter.id, parameter.key, parameter.value);
+			},
+
+			hideThumbWrapper: function () {
+				self._hideThumbWrapper();
+			},
+
+			makePredictedWordCollapsible: function () {
+				self._makePredictedWordCollapsible();
+				self._stickControlWrapperToHeader();
+			},
+
+			collapsePredictedWord: function () {
+				self._collapsePredictedWord();
 			}
 		};
 
@@ -143,6 +166,52 @@
 
 	View.prototype._hidePredictionPanel = function() {
 		UTIL.$removeClass(this.$predictionPanel, "show")
+	};
+
+	View.prototype._showThumb = function (text) {
+		UTIL.$removeClass(this.$imageWrapper, "hidden");
+	};
+
+	View.prototype._hideThumbWrapper = function () {
+		UTIL.$addClass(this.$imageWrapper, "hidden");
+	};
+
+	View.prototype._collapsePredictedWord = function () {
+		UTIL.$addClass(this.$predictedWordWrapper, "collapsed");
+	};
+
+	View.prototype._isPredictedWordCollapsible = function () {
+		return UTIL.$containsClass(this.$predictedWordWrapper, "collapsible");
+	};
+
+	View.prototype._openPredictedWord = function () {
+		UTIL.$removeClass(this.$predictedWordWrapper, "collapsed");
+	};
+
+	View.prototype._makePredictedWordCollapsible = function () {
+		var self = this;
+		UTIL.$addClass(self.$predictedWordWrapper, "collapsible");
+
+		self.eventListener.PWCollapsible = function () {
+			UTIL.$toggleClass(self.$predictedWordWrapper, "collapsed");
+		};
+		UTIL.$on(self.$predictedWordListHeader, "click", self.eventListener.PWCollapsible);
+	};
+
+	View.prototype._makePredictedWordNotCollapsible = function () {
+		UTIL.$removeClass(this.$predictedWordWrapper, "collapsible");
+		UTIL.$removeClass(this.$predictedWordWrapper, "collapsed");
+
+		UTIL.$off(this.$predictedWordListHeader, this.eventListener.PWCollapsible);
+		delete this.eventListener.PWCollapsible;
+	};
+
+	View.prototype._stickControlWrapperToHeader = function() {
+		UTIL.$addClass(this.$controlWrapper, "stick");
+	};
+
+	View.prototype._unstickControlWrapperToHeader = function() {
+		UTIL.$removeClass(this.$controlWrapper, "stick");
 	};
 
 	View.prototype._showThumbPreloader = function(text) {

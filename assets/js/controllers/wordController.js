@@ -25,7 +25,12 @@
 			self.showPredictedWords(filepath);
 		});
 
-		self.view.bind("predictionWordPicked", function (word) {
+		self.view.bind("predictionWordPicked", function (word, isCollapsible) {
+			if (!isCollapsible) {
+				self.makePredictedWordCollapsible();
+			}
+			self.collapsePredictedWord();
+			self.searchForWord(word);
 		});
 	}
 
@@ -67,11 +72,20 @@
 		});
 	};
 
+	Controller.prototype.makePredictedWordCollapsible = function() {
+		this.view.render("hideThumbWrapper");
+		this.view.render("makePredictedWordCollapsible");
+	};
+
+	Controller.prototype.collapsePredictedWord = function() {
+		this.view.render("collapsePredictedWord");
+	}
+
 	Controller.prototype.addResults = function(results) {
 		this.view.render("showResultPanel");
 		if (results.length > 0) {
 			for (var result of results) {
-					this.addResult(result.word);
+				this.addResult(result.word);
 			}
 		}
 	};
