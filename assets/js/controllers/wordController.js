@@ -51,7 +51,13 @@
 		}
 
 		API.wordnik.searchForWord(searchText, function(results) {
-			self.addResults(results);
+			self.view.render("showResultPanel");
+			// only take first result, just in case
+			// the api unexpectedly return more than one similar word
+			var result = results[0];
+			if (!!result) {
+				self.addResult(result.word);
+			}
 		});
     };
 
@@ -81,23 +87,23 @@
 		this.view.render("collapsePredictedWord");
 	}
 
-	Controller.prototype.addResults = function(results) {
-		this.view.render("showResultPanel");
-		if (results.length > 0) {
-			for (var result of results) {
-				this.addResult(result.word);
-			}
-		}
-	};
-
 	Controller.prototype.addResult = function (word) {
-		var model = new app.WordModel({ word: word });
-		this.collections.word.add(model);
-		this.view.render("addWord", {
-			id: model.get("id"),
-			word: model.get("word")
-		});
-		this._fetchWordData(model);
+		var model = this.collections.word.findByWord(word);
+		var isFirst = this.collections.word.count() == 0;
+		if (model === undefined) {
+			model = new app.WordModel({ word: word });
+			this.collections.word.add(model);
+			this.view.render("addWord", {
+				id: model.get("id"),
+				word: model.get("word")
+			});
+			this._fetchWordData(model);
+		}
+		if (!isFirst) {
+			var wordItem = this.view.getWordItem(model.get("id"));
+			var predictedWordListHeader = this.view.getPredictedWordListHeader();
+			app.layout.controller.scrollTo( wordItem.offsetTop, - predictedWordListHeader.offsetHeight * 2.5 );
+		}
 	};
 
 	Controller.prototype._fetchWordData = function(model) {

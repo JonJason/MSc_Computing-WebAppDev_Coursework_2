@@ -50,5 +50,4 @@
 	};
 
 	UTIL.$on(window, 'load', setupApp);
-	// UTIL.$on(window, 'hashchange', setView);
 })();

@@ -57,6 +57,27 @@
         return this.models.length;
     };
 
+    Collection.prototype.find = function(param) {
+        var match = function(model, index, models) {
+            var isMatch = true;
+            for (var property in param) { // loop through param
+                if (param.hasOwnProperty(property)) {
+                    if (model.get(property) != param[property]) { // if there is a difference
+                        isMatch = false;
+                    }
+                }
+            }
+
+            return isMatch;
+        };
+
+        return this.models.find(match);
+    };
+
+    Collection.prototype.findByWord = function(word) {
+        return this.find({ word: word});
+    }
+
 	// Export to window
 	window.app = window.app || {};
     window.app.WordCollection = Collection;

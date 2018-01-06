@@ -24,7 +24,11 @@
 	};
 
     Controller.prototype.showNavigation = function () {
-        this.view.render("showNavigationDropdown");
+        this.view.render("showNavigation");
+    };
+
+    Controller.prototype.scrollTo = function (scrollTop, offset) {
+        this.view.render("scrollTo", {scrollTop: scrollTop, offset: offset});
     };
 
 	// Export to window

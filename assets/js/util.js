@@ -242,6 +242,36 @@ var UTIL = (function (UTIL) {
 	        frag.appendChild(elem.childNodes[0]);
 	    }
 	    return frag;
-	}
+	};
+
+	UTIL.animate = function (animation, duration) {
+
+		var start = null;
+
+		function step(timestamp) {
+		  if (!start) start = timestamp; // starting time
+		  var progress = timestamp - start; // progress time
+
+		  // call animation function with map progress value (0 to 1)
+		  animation(UTIL.easeInOutCubic(progress, duration));
+
+		  if (progress < duration) {
+		    window.requestAnimationFrame(step);
+		  }
+		}
+
+		window.requestAnimationFrame(step);
+	};
+
+	UTIL.easeInOutCubic = function (t, duration) {
+		t /= duration/2; // twice of progress (value goes from 0 to 2)
+
+		// if progress is below 50%
+		if (t < 1) { return t*t*t/2; }
+		// if progress is equal to or above 50%
+		if (t > 2) { t = 2; } // prevent overflow
+		t = 2 - t;
+		return 1 - t*t*t/2;
+	};
 	return UTIL;
 })(UTIL || {});

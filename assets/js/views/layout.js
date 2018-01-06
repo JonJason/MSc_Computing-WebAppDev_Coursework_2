@@ -2,29 +2,29 @@
 	"use strict";
 
 	function View(template) {
-		this.$pageOverlay = UTIL.qs(".page-overlay");
-        this.$menuBtn = UTIL.qs(".menu-btn");
-        this.$body = document.body;
+		this.$body = document.body;
+		this.$pageOverlay = UTIL.qs(".page-overlay", this.$body);
+        this.$menuBtn = UTIL.qs(".menu-btn", this.$body);
+		this.$pageWrapper = UTIL.qs(".page-wrapper", this.$body);
 	}
 
-	View.prototype.render = function (command, param) {
+	View.prototype.render = function (command, parameter) {
 		var self = this;
 		var viewCommands = {
-            setOngoingPageLink: function (name) {
-                var $activeNavLink = UTIL.qs(".nav-link[data-link-page='"+ name +"']");
-                UTIL.$addClass($activeNavLink, "ongoing-page");
+            setOngoingPageLink: function () {
+				self._setOngoingPage(parameter);
             },
 
-            showNavigationDropdown: function() {
-                self._setScrollTop(0);
-    			UTIL.$toggleClass(self.$menuBtn, "active");
-                var isActive = UTIL.$containsClass(self.$menuBtn, "active");
-                UTIL.$toggleClass(self.$body, "no-scroll-y", isActive);
-    			UTIL.$toggleClass(self.$pageOverlay, "show", isActive);
+            showNavigation: function() {
+				self._showNavigationPopup();
+            },
+
+            scrollTo: function() {
+                self._scrollTo(parameter);
             }
 		};
 
-		viewCommands[command](param);
+		viewCommands[command]();
 	};
 
     /**
@@ -41,19 +41,43 @@
 		};
 	};
 
+	View.prototype._setOngoingPage = function (name) {
+		var $activeNavLink = UTIL.qs(".nav-link[data-link-page='"+ name +"']");
+		UTIL.$addClass($activeNavLink, "ongoing-page");
+	};
+
+	View.prototype._showNavigationPopup = function () {
+		UTIL.$toggleClass(this.$menuBtn, "active");
+		var isActive = UTIL.$containsClass(this.$menuBtn, "active");
+		UTIL.$toggleClass(this.$pageOverlay, "show", isActive);
+	};
+
     /**
      * get scrolltop
      */
      View.prototype._getScrollTop = function () {
-         return document.documentElement.scrollTop;
-     }
+         return this.$pageWrapper.scrollTop;
+     };
 
      /**
-      * get scrolltop
+      * set scrolltop
       */
       View.prototype._setScrollTop = function (value) {
-          document.documentElement.scrollTop = value;
-      }
+          this.$pageWrapper.scrollTop = value;
+      };
+
+      /**
+       * set scrolltop
+       */
+       View.prototype._scrollTo = function (option) {
+		   var self = this;
+		   var start = self._getScrollTop();
+		   var end = option.scrollTop + option.offset;
+		   var total = end - start;
+		   UTIL.animate(function(progress) {
+			   self._setScrollTop(progress * total + start);
+		   }, 1000);
+       };
 
 	// Export to window
 	window.app = window.app || {};
