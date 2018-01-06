@@ -212,6 +212,44 @@
 			var child = UTIL.createElement(UTIL.parseTemplate(templates[key], data));
 			parent.appendChild(child);
 		}
+
+		if (key == "audios") { // bind pronounce event
+			var audioWrapper = parent.parentElement;
+			parent.dataset.index = 0;
+			var pronounce = function() {
+				var audioContainer = audioWrapper.children[0];
+
+				// get the index of the audio to play and
+				// transform index to integer since dataset stored as string
+				var index = parseInt(audioContainer.dataset.index);
+				var audio = audioContainer.children[index];
+
+				// transform duration to float since dataset stored as string and
+				// change the unit to millisecond which is the unit used by setTimeout function
+				var duration = parseFloat(audio.dataset.duration) * 1000;
+
+				// play audio and animation
+				audio.play();
+				UTIL.$addClass(audioWrapper, "speaking");
+
+				// set timeout to stop speaking animation by the duration
+				setTimeout(function() {
+					UTIL.$removeClass(audioWrapper, "speaking");
+				}, duration);
+
+				index++; // next audio for next play
+				index = index % audioContainer.childElementCount; // reset index to 0 when reach the count
+				audioContainer.dataset.index = index; // store back the next index in the dataset
+			};
+			UTIL.$on(audioWrapper, "click", pronounce);
+		} else if (key == "examples") {
+			var exampleWrapper = parent.parentElement;
+			var toggleExamples = function () {
+				UTIL.$toggleClass(exampleWrapper, "opened");
+			};
+			var exampleHeader = UTIL.qs(".example-header", exampleWrapper);
+			UTIL.$on(exampleHeader, "click", toggleExamples);
+		}
 	};
 
 	// Export to window

@@ -251,17 +251,27 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel .word-wrapper .word-content h4 { margin: 0.5em 0; }
 
-.result-panel .word-wrapper .word-content h5 { margin-top: 1em; margin-bottom: 0; }
-
 .result-panel .word-wrapper .word-content p { margin-top: 0.2em; margin-bottom: 0; }
 
 .result-panel .word-wrapper .word-content .definition-wrapper .definition-header { padding: 0 1em; }
 
 .result-panel .word-wrapper .word-content .definition-wrapper .word-definition-list { padding: 0 1em; max-height: 10em; overflow-y: auto; }
 
+.result-panel .word-wrapper .word-content .definition-wrapper .word-definition-list li:first-child h5 { margin-top: 0.5em; }
+
+.result-panel .word-wrapper .word-content .definition-wrapper .word-definition-list h5 { margin-top: 1em; margin-bottom: 0; }
+
 .result-panel .word-wrapper .word-content .example-wrapper { padding-left: 1em; }
 
-.result-panel .word-wrapper .word-content .example-wrapper .word-example-list { padding: 0 1em; max-height: 10em; overflow-y: auto; }
+.result-panel .word-wrapper .word-content .example-wrapper.opened .example-header:after { font-family: FontAwesome; content: ""; }
+
+.result-panel .word-wrapper .word-content .example-wrapper.opened .word-example-list { max-height: 10em; }
+
+.result-panel .word-wrapper .word-content .example-wrapper .example-header { cursor: pointer; }
+
+.result-panel .word-wrapper .word-content .example-wrapper .example-header:after { margin-left: 0.5em; font-family: FontAwesome; content: ""; }
+
+.result-panel .word-wrapper .word-content .example-wrapper .word-example-list { padding: 0 1em; max-height: 0; overflow-y: auto; transition: max-height 0.3s; }
 
 .result-panel .word-wrapper .word-content .example-wrapper .word-example-list p { padding-bottom: 0.5em; }
 

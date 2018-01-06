@@ -339,11 +339,6 @@
                 margin: 0.5em 0;
             }
 
-            h5 {
-                margin-top: 1em;
-                margin-bottom: 0
-            }
-
             p {
                 margin-top: 0.2em;
                 margin-bottom: 0;
@@ -358,16 +353,51 @@
                     padding: 0 1em;
                     max-height: 10em;
                     overflow-y: auto;
+
+                    li:first-child {
+
+                        h5 {
+                            margin-top: 0.5em;
+                        }
+                    }
+
+                    h5 {
+                        margin-top: 1em;
+                        margin-bottom: 0;
+
+                    }
+
                 }
             }
 
             .example-wrapper {
                 padding-left: 1em;
 
+                &.opened {
+
+                    .example-header:after {
+                        @include fa-caret-up();
+                    }
+
+                    .word-example-list {
+                        max-height: 10em;
+                    }
+                }
+
+                .example-header {
+                    cursor: pointer;
+
+                    &:after {
+                        margin-left: 0.5em;
+                        @include fa-caret-down();
+                    }
+                }
+
                 .word-example-list {
                     padding: 0 1em;
-                    max-height: 10em;
+                    max-height: 0;
                     overflow-y: auto;
+                    transition: max-height 0.3s;
 
                     p {
                         padding-bottom: 0.5em
