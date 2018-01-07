@@ -19,7 +19,6 @@ var API = (function(parent){
 
         clarifaiApp.models.predict(predictionModel.general, filepath).then(
             function(response) {
-                console.log(JSON.stringify(response.outputs[0].data.concepts));
                 callback && callback(response.outputs[0].data.concepts);
             },
             function(err) {

@@ -72,7 +72,11 @@
 			UTIL.$delegate(self.$predictedWordList, ".predicted-word", "click", function(event, currentTarget) {
 				handler(currentTarget.dataset.word, self._isPredictedWordCollapsible());
 			});
-		};
+		} else if (event === "wordPhraseClick") {
+			UTIL.$delegate(self.$wordList, ".word-phrase", "click", function(event, currentTarget) {
+				handler(currentTarget.dataset.phrase);
+			});
+		}
 	};
 
 	View.prototype.render = function (viewCmd, parameter) {

@@ -1,11 +1,8 @@
 .page-wrapper {
     flex: 1 1 auto;
     overflow-y: auto;
-    background-color: $bg-color-3;
 
-    &.shifted:before {
-        height: 4em;
-        display: block;
-        content: "";
+    &.shifted {
+        margin-top: 4em
     }
 }

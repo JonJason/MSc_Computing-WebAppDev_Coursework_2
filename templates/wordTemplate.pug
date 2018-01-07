@@ -30,7 +30,7 @@ script#word_audio_item(type="text/template")
         source(src="{{url}}" type="audio/mpeg")
 script#word_phrase_item(type="text/template")
     li.word-phrase-item
-        button.word-phrase
+        button.word-phrase(data-phrase="{{phrase}}")
             strong {{phrase}}
 
 script#word_example_item(type="text/template")

@@ -33,6 +33,10 @@
 			self.searchForWord(word);
 		});
 
+		self.view.bind("wordPhraseClick", function (phrase) {
+			self.searchForWord(phrase);
+		});
+
 		var handleHash = function () {
 			var hash = document.location.hash.slice(1);
 			if (hash == "OTD") {
@@ -69,7 +73,7 @@
 				self.addResult({ word: result.word });
 			} else {
 				// HANDLE
-				console.log("word not found");
+				window.alert('word "' + searchText + '" is not found or the detail for word "' + searchText + '" is not available at the moment yet')
 			}
 		});
     };

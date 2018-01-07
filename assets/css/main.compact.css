@@ -2,7 +2,7 @@
 /*** font awesome hack ***/
 * { box-sizing: border-box; }
 
-body { margin: 0; min-width: 18em; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
+body { margin: 0; min-width: 18em; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; background-color: #353537; }
 
 a { display: inline-block; text-decoration: none; }
 
@@ -86,9 +86,9 @@ nav { position: absolute; right: 0; bottom: 0; top: 0; display: flex; align-item
 
 .nav-item .dropdown .dropdown-link { font-size: 1.1em; display: block; padding: 0.8em 1.8em; }
 
-.page-wrapper { flex: 1 1 auto; overflow-y: auto; background-color: #353537; }
+.page-wrapper { flex: 1 1 auto; overflow-y: auto; }
 
-.page-wrapper.shifted:before { height: 4em; display: block; content: ""; }
+.page-wrapper.shifted { margin-top: 4em; }
 
 footer { flex: 0; height: 2em; line-height: 2em; background-color: #5F5F5F; color: white; }
 
@@ -256,21 +256,21 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel .word-wrapper .word-content .phrase-wrapper .word-phrase-list .word-phrase-item .word-phrase { white-space: nowrap; height: 3em; border-radius: 0.25em; padding: 0 1em; border-style: none; background-color: #FFC470; }
 
-.prediction-panel { background-color: rgba(53, 53, 55, 0.3) !important; position: fixed; top: 3.75em; bottom: 0; left: 0; right: 0; display: none; padding: 2em; transition: padding 0.7s cubic-bezier(0.1, 0.9, 0.2, 0.8) 0.3s, background-color 0.3s; }
+.prediction-panel { background-color: rgba(53, 53, 55, 0.5) !important; position: fixed; top: 3.75em; bottom: 0; left: 0; right: 0; display: none; padding: 2em; overflow-y: auto; transition: padding 0.7s cubic-bezier(0.1, 0.9, 0.2, 0.8) 0.3s, background-color 0.3s; }
 
 .prediction-panel.show { display: block; }
 
-.prediction-panel.stick { animation: stick-to-top 0.7s cubic-bezier(0.5, -0.6, 0.9, -0.05) 0.3s 1 normal forwards; padding: 0; bottom: auto; background-color: transparent !important; }
+.prediction-panel.stick { animation: stick-to-top 0.7s cubic-bezier(0.5, -0.6, 0.9, -0.05) 0.3s 1 normal forwards; padding: 0; bottom: auto; overflow-y: visible; background-color: transparent !important; }
 
 .prediction-panel.stick .prediction-wrapper { transition: border-radius 0.3s step-end; border-radius: 0; }
 
 .prediction-wrapper { background-color: white; border-radius: 0.5em; overflow: hidden; box-shadow: 0 0.3em 0.5em #353537; }
 
-.prediction-wrapper .image-wrapper { background-color: black; position: relative; width: 100%; transition: max-height 0.3s; max-height: 100em; }
+.prediction-wrapper .image-wrapper { background-color: black; position: relative; width: 100%; transition: max-height 0.3s, opacity 0.3s; max-height: 100em; opacity: 1; }
 
 .prediction-wrapper .image-wrapper:before { display: block; content: ""; width: 100%; padding-top: 100%; }
 
-.prediction-wrapper .image-wrapper.hidden { max-height: 0; }
+.prediction-wrapper .image-wrapper.hidden { max-height: 0; pointer-events: none; opacity: 0; }
 
 .prediction-wrapper .image-wrapper > .image-container { position: absolute; top: 0; left: 0; right: 0; bottom: 0; padding: 1em; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 

@@ -46,14 +46,14 @@ var API = (function(parent){
             "minLength": 1,
             "maxLength": -1,
             "skip": 0,
-            "limit": 1
+            "limit": 10
         };
 
         var suffix = this.getSuffix("wordsSearch", { word: word });
 
         UTIL.sendRequest(UTIL.buildRequestURI(this.baseURL, params, suffix), {
             onLoad: function(response) {
-                var result = JSON.parse(response).searchResults[0];
+                var result = JSON.parse(response).searchResults[0]; // only take the first word
                 if (result.count < 1) {
                     result = undefined;
                 }

@@ -6,11 +6,11 @@ body {
     margin: 0;
     min-width: 18em; // set minimum width to body to prevent content being squeezed in smaller screen.
     font-family: sans-serif;
-    // I use flex to prevent scrollbar overlap header bar.
-    // The scrollbar will only appear on .page-wrapper.
+    // I use flex to prevent scrollbar overlap header bar by making page wrapper scrollable.
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-color: $bg-color-3;
 }
 
 a {
