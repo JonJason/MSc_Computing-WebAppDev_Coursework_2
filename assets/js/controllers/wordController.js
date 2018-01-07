@@ -90,13 +90,19 @@
 
 	Controller.prototype.fetchWordOfTheDay = function () {
 		var self = this;
-		API.wordnik.getWOTD(function (data) {
-			if (!!data) {
-				data.isWOTD = true;
-				self.view.render("showResultPanel");
-				self.addResult(data);
-			}
-		});
+		var storedWOTD = app.DB.getTodayWOTD();
+		if (storedWOTD) {
+			self.view.render("showResultPanel");
+			self.addResult(storedWOTD);
+		} else {
+			API.wordnik.getWOTD(function (data) {
+				if (!!data) {
+					data.isWOTD = true;
+					self.view.render("showResultPanel");
+					self.addResult(data);
+				}
+			});
+		}
 	};
 
 	Controller.prototype.showPredictedWords = function (filepath) {
@@ -126,6 +132,7 @@
 
 	Controller.prototype.addResult = function (data) {
 		var model = this.collections.word.findByWord(data.word);
+
 		if (model === undefined) {
 			model = new app.WordModel(data);
 			this.collections.word.add(model);
@@ -135,7 +142,6 @@
 			});
 			this._fetchWordData(model);
 		}
-
 		var wordItem = this.view.getWordItem(model.get("id"));
 		var predictedWordListHeader = this.view.getPredictedWordListHeader();
 		var scrollTop = wordItem.offsetTop - predictedWordListHeader.offsetHeight;
@@ -151,7 +157,10 @@
 			var data = {};
 			data[name] = value;
 			model.set(data);
-			self.view.render("updateWord", { id: model.get("id"), key: name, value: model.get(name) });
+			app.DB.saveWOTD(model.toJSON());
+			if (value.length >= 1) {
+				self.view.render("updateWord", { id: model.get("id"), key: name, value: model.get(name) });
+			}
 		};
 
 		// fetching definitions, phrases, audios, and examples

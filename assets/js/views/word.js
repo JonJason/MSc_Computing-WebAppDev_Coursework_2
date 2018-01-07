@@ -265,6 +265,13 @@
 
 	View.prototype._updateWordItem = function(id, key, value) {
 		var wordItem = UTIL.qs("#word_" + id, this.$wordList);
+		var wrappers = {
+			audios: "audio-wrapper",
+			definitions: "definition-wrapper",
+			phrases: "phrase-wrapper",
+			examples: "example-wrapper"
+		};
+
 		var classNames = {
 			audios: "audio-container",
 			definitions: "word-definition-list",
@@ -284,6 +291,9 @@
 			var child = UTIL.createElement(UTIL.parseTemplate(templates[key], data));
 			parent.appendChild(child);
 		}
+
+		var wrapper = UTIL.qs("." + wrappers[key], wordItem);
+		UTIL.$removeClass(wrapper, "hidden");
 
 		if (key == "audios") { // bind pronounce event
 			var audioWrapper = parent.parentElement;

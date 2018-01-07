@@ -35,6 +35,10 @@
         return this[propertyName];
     };
 
+	Model.prototype.toJSON = function() {
+		return UTIL.clone(this);
+	};
+
 	/**
 	 * Creates a new instance WordCollection.
 	 * @constructor
@@ -79,7 +83,7 @@
 
     Collection.prototype.findByWord = function(word) {
         return this.find({ word: word});
-    }
+    };
 
 	// Export to window
 	window.app = window.app || {};

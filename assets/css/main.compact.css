@@ -208,6 +208,8 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel .word-wrapper { background-color: #FFD9A4; border-radius: 0.5em; }
 
+.result-panel .word-wrapper .definition-wrapper.hidden, .result-panel .word-wrapper .audio-wrapper.hidden, .result-panel .word-wrapper .example-wrapper.hidden, .result-panel .word-wrapper .phrase-wrapper.hidden { display: none !important; }
+
 .result-panel .word-wrapper .word-header { padding: 0.5em 0.8em; display: flex; align-items: flex-end; font-size: 1.2em; border-bottom: 0.1em solid rgba(0, 0, 0, 0.3); }
 
 .result-panel .word-wrapper .word-header .header-text { margin: 0; text-transform: capitalize; }

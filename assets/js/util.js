@@ -273,5 +273,50 @@ var UTIL = (function (UTIL) {
 		t = 2 - t;
 		return 1 - t*t*t/2;
 	};
+
+	UTIL.clone = function(o) {
+		var deepClone = function(obj) {
+			if (typeof obj !== "object" || obj === null) {
+				return obj;
+			}
+
+			if (obj.length !== undefined) { // is array
+				var value = [];
+				for (var element of obj) {
+					value.push(deepClone(element));
+				}
+
+				return value;
+			}
+
+			// is object.
+			var val = {};
+			for (var property in obj) {
+				if (obj.hasOwnProperty(property)) {
+					val[property] = deepClone(obj[property]);
+				}
+			}
+			return val;
+		};
+
+		return deepClone(o);
+	};
+
+	UTIL.compareDate = function(date1, date2) {
+		if (date1.getDate() == date2.getDate()) {
+			return false;
+		}
+
+		if (date1.getMonth() == date2.getMonth()) {
+			return false;
+		}
+
+		if (date1.getFullYear() == date2.getFullYear()) {
+			return false;
+		}
+
+		return true;
+	};
+
 	return UTIL;
 })(UTIL || {});

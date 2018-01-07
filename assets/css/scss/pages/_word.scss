@@ -195,6 +195,12 @@
         background-color: $bg-color-5;
         border-radius: $panel-border-radius;
 
+        .definition-wrapper, .audio-wrapper, .example-wrapper, .phrase-wrapper {
+            &.hidden {
+                display: none !important;
+            }
+        }
+
         .word-header {
             padding: 0.5em 0.8em;
             display: flex;
