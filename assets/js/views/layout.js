@@ -20,14 +20,6 @@
 				self._showNavigationPopup();
             },
 
-            shiftPageWrapper: function() {
-                self._shiftPageWrapper();
-            },
-
-            unshiftPageWrapper: function() {
-                self._unshiftPageWrapper();
-            },
-
             scrollTo: function() {
                 self._scrollTo(parameter);
             }
@@ -85,16 +77,8 @@
 		   var total = end - start;
 		   UTIL.animate(function(progress) {
 			   self._setScrollTop(progress * total + start);
-		   }, 1000);
+		   }, 800);
        };
-
-	   View.prototype._shiftPageWrapper = function () {
-		   UTIL.$addClass(this.$pageWrapper, "shifted");
-	   };
-
-	   View.prototype._unshiftPageWrapper = function () {
-		   UTIL.$removeClass(this.$pageWrapper, "shifted");
-	   };
 
 	// Export to window
 	window.app = window.app || {};

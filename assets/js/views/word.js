@@ -101,6 +101,10 @@
 			showPredictionPanel: function () {
 				self._showPredictionPanel();
 				self._showThumbPreloader("Loading");
+				self._unstickPredictionPanelToHeader();
+				self._makePredictedWordNotCollapsible();
+				self._showThumbWrapper();
+
 			},
 
 			showThumb: function () {
@@ -121,11 +125,8 @@
 				self._updateWordItem(parameter.id, parameter.key, parameter.value);
 			},
 
-			hideThumbWrapper: function () {
-				self._hideThumbWrapper();
-			},
-
 			makePredictedWordCollapsible: function () {
+				self._hideThumbWrapper();
 				self._makePredictedWordCollapsible();
 				self._stickPredictionPanelToHeader();
 			},
@@ -162,7 +163,7 @@
 		UTIL.$removeClass(this.$predictionPanel, "show")
 	};
 
-	View.prototype._showThumb = function (text) {
+	View.prototype._showThumbWrapper = function (text) {
 		UTIL.$removeClass(this.$imageWrapper, "hidden");
 	};
 
@@ -184,19 +185,25 @@
 
 	View.prototype._makePredictedWordCollapsible = function () {
 		var self = this;
+		UTIL.$addClass(self.$searchPanel, "shifted");
 		UTIL.$addClass(self.$predictedWordWrapper, "collapsible");
 
+		// save toggle collapse event listener
 		self.eventListener.PWCollapsible = function () {
 			UTIL.$toggleClass(self.$predictedWordWrapper, "collapsed");
 		};
+		// add toggle collapse event listener
 		UTIL.$on(self.$predictedWordListHeader, "click", self.eventListener.PWCollapsible);
 	};
 
 	View.prototype._makePredictedWordNotCollapsible = function () {
+		UTIL.$removeClass(this.$searchPanel, "shifted");
 		UTIL.$removeClass(this.$predictedWordWrapper, "collapsible");
 		UTIL.$removeClass(this.$predictedWordWrapper, "collapsed");
 
-		UTIL.$off(this.$predictedWordListHeader, this.eventListener.PWCollapsible);
+		// remove toggle collapse event listener
+		UTIL.$off(this.$predictedWordListHeader, "click", this.eventListener.PWCollapsible);
+		// delete toggle collapse event listener
 		delete this.eventListener.PWCollapsible;
 	};
 

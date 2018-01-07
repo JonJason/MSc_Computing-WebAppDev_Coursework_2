@@ -31,10 +31,6 @@
         this.view.render("scrollTo", scrollTop);
     };
 
-	Controller.prototype.shiftPageWrapper = function() {
-		this.view.render("shiftPageWrapper");
-	};
-
 	// Export to window
 	window.app = window.app || {};
 	window.app.LayoutController = Controller;

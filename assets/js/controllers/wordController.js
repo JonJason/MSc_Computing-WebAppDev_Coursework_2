@@ -117,9 +117,7 @@
 	};
 
 	Controller.prototype.makePredictedWordCollapsible = function() {
-		this.view.render("hideThumbWrapper");
 		this.view.render("makePredictedWordCollapsible");
-		app.layout.controller.shiftPageWrapper();
 	};
 
 	Controller.prototype.collapsePredictedWord = function() {
