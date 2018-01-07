@@ -1,10 +1,6 @@
 .search-panel { // search panel
     min-height: calc(100vh - #{$header-height});
 
-    &.hidden {
-        display: none;
-    }
-
     .section-head {
         padding-top: 2em;
         padding-bottom: 1em;
@@ -188,7 +184,7 @@
         display: block;
     }
 
-    .control-wrapper {
+    .prediction-wrapper {
         padding: 1em 0;
 
         &.stick {
@@ -196,15 +192,11 @@
             animation: stick-to-top 0.5s cubic-bezier(0.5,-0.6, 0.9,-0.05) 0.3s 1 normal forwards;
             transition: padding 0.5s cubic-bezier(0.1, 0.9, 0.2, 0.8) 0.3s;
             padding: 0;
+            top: $header-height;
 
             .prediction-panel {
                 transition: border-radius 0.3s step-end;
                 border-radius: 0;
-            }
-
-            ~ .result-wrapper {
-                transition: padding-top 0.3s step-end;
-                padding-top: 5.75em;
             }
         }
     }
@@ -353,10 +345,13 @@
         }
     }
 
+    .word-list, .word-item {
+        padding: 1em 0;
+    }
+
     .word-wrapper {
         background-color: $bg-color-5;
         border-radius: $panel-border-radius;
-        margin-bottom: 2em;
 
         .word-header {
             padding: 0.5em 0.8em;

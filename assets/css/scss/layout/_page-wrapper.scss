@@ -1,4 +1,10 @@
 .page-wrapper {
     flex: 1 1 auto;
     overflow-y: auto;
+
+    &.shifted:before {
+        height: 4em;
+        display: block;
+        content: "";
+    }
 }

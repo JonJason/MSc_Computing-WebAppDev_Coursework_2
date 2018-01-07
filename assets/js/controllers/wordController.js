@@ -108,6 +108,8 @@
 				self.view.render("showPredictionResult", {
 					words: predictions.map(x => x.name)
 				});
+				var resultPanel = self.view.getResultPanel();
+				app.layout.controller.scrollTo(resultPanel.offsetTop);
 			});
 		});
 	};
@@ -115,6 +117,7 @@
 	Controller.prototype.makePredictedWordCollapsible = function() {
 		this.view.render("hideThumbWrapper");
 		this.view.render("makePredictedWordCollapsible");
+		app.layout.controller.shiftPageWrapper();
 	};
 
 	Controller.prototype.collapsePredictedWord = function() {
@@ -123,7 +126,6 @@
 
 	Controller.prototype.addResult = function (data) {
 		var model = this.collections.word.findByWord(data.word);
-		var isFirst = this.collections.word.count() == 0;
 		if (model === undefined) {
 			model = new app.WordModel(data);
 			this.collections.word.add(model);
@@ -133,11 +135,11 @@
 			});
 			this._fetchWordData(model);
 		}
-		if (!isFirst) {
-			var wordItem = this.view.getWordItem(model.get("id"));
-			var predictedWordListHeader = this.view.getPredictedWordListHeader();
-			app.layout.controller.scrollTo( wordItem.offsetTop, - predictedWordListHeader.offsetHeight * 2.5 );
-		}
+
+		var wordItem = this.view.getWordItem(model.get("id"));
+		var predictedWordListHeader = this.view.getPredictedWordListHeader();
+		var scrollTop = wordItem.offsetTop - predictedWordListHeader.offsetHeight;
+		app.layout.controller.scrollTo(scrollTop);
 	};
 
 	Controller.prototype._fetchWordData = function(model) {

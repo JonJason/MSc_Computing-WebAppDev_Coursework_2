@@ -20,8 +20,8 @@
 		this.$resultPanel = UTIL.qs(".result-panel");
 
 		// control wrapper
-		this.$controlWrapper = UTIL.qs(".control-wrapper", this.$resultPanel);
-		this.$predictionPanel = UTIL.qs(".prediction-panel", this.$controlWrapper);
+		this.$predictionWrapper = UTIL.qs(".prediction-wrapper", this.$resultPanel);
+		this.$predictionPanel = UTIL.qs(".prediction-panel", this.$predictionWrapper);
 		this.$imageWrapper = UTIL.qs(".image-wrapper", this.$predictionPanel);
 		this.$thumb = UTIL.qs(".thumbnail", this.$imageWrapper);
 		this.$preloader = UTIL.qs(".preloader-overlay", this.$predictionPanel);
@@ -87,12 +87,10 @@
 			},
 
 			showResultPanel: function() {
-				self._hideSearchPanel();
 				self._showResultPanel();
 			},
 
-			showSearchPanel: function() {
-				self._showSearchPanel();
+			hideResultPanel: function() {
 				self._hideResultPanel();
 			},
 
@@ -142,14 +140,6 @@
 
 	View.prototype._darkenSearchbar = function() {
 		UTIL.$removeClass(this.$searchbarWrapper, "active");
-	};
-
-	View.prototype._showSearchPanel = function() {
-		UTIL.$removeClass(this.$searchPanel, "hidden");
-	};
-
-	View.prototype._hideSearchPanel = function() {
-		UTIL.$addClass(this.$searchPanel, "hidden");
 	};
 
 	View.prototype._showResultPanel = function() {
@@ -207,11 +197,11 @@
 	};
 
 	View.prototype._stickControlWrapperToHeader = function() {
-		UTIL.$addClass(this.$controlWrapper, "stick");
+		UTIL.$addClass(this.$predictionWrapper, "stick");
 	};
 
 	View.prototype._unstickControlWrapperToHeader = function() {
-		UTIL.$removeClass(this.$controlWrapper, "stick");
+		UTIL.$removeClass(this.$predictionWrapper, "stick");
 	};
 
 	View.prototype._showThumbPreloader = function(text) {
@@ -333,6 +323,10 @@
 
 	View.prototype.getPredictedWordListHeader = function (id) {
 		return this.$predictedWordListHeader;
+	};
+
+	View.prototype.getResultPanel = function () {
+		return this.$resultPanel;
 	};
 
 	// Export to window

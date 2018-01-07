@@ -3,8 +3,9 @@
 
 	function View(template) {
 		this.$body = document.body;
+		this.$header = UTIL.qs("header", this.$body);
+        this.$menuBtn = UTIL.qs(".menu-btn", this.$header);
 		this.$pageOverlay = UTIL.qs(".page-overlay", this.$body);
-        this.$menuBtn = UTIL.qs(".menu-btn", this.$body);
 		this.$pageWrapper = UTIL.qs(".page-wrapper", this.$body);
 	}
 
@@ -17,6 +18,14 @@
 
             showNavigation: function() {
 				self._showNavigationPopup();
+            },
+
+            shiftPageWrapper: function() {
+                self._shiftPageWrapper();
+            },
+
+            unshiftPageWrapper: function() {
+                self._unshiftPageWrapper();
             },
 
             scrollTo: function() {
@@ -69,15 +78,23 @@
       /**
        * set scrolltop
        */
-       View.prototype._scrollTo = function (option) {
+       View.prototype._scrollTo = function (scrollTop) {
 		   var self = this;
 		   var start = self._getScrollTop();
-		   var end = option.scrollTop + option.offset;
+		   var end = scrollTop - this.$header.offsetHeight;
 		   var total = end - start;
 		   UTIL.animate(function(progress) {
 			   self._setScrollTop(progress * total + start);
 		   }, 1000);
        };
+
+	   View.prototype._shiftPageWrapper = function () {
+		   UTIL.$addClass(this.$pageWrapper, "shifted");
+	   };
+
+	   View.prototype._unshiftPageWrapper = function () {
+		   UTIL.$removeClass(this.$pageWrapper, "shifted");
+	   };
 
 	// Export to window
 	window.app = window.app || {};

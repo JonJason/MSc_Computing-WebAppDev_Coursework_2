@@ -50,8 +50,6 @@ button { cursor: pointer; }
 
 .clear-both { clear: both; }
 
-.no-scroll-y { overflow-y: hidden; }
-
 header { position: relative; flex: 0 0 auto; height: 3.75em; width: 100%; background-color: #00396C; z-index: 1000; }
 
 .brand { position: absolute; left: 0; top: 0; bottom: 0; }
@@ -91,6 +89,8 @@ nav { position: absolute; right: 0; bottom: 0; top: 0; display: flex; align-item
 .nav-item .dropdown .dropdown-link { font-size: 1.1em; display: block; padding: 0.8em 1.8em; }
 
 .page-wrapper { flex: 1 1 auto; overflow-y: auto; }
+
+.page-wrapper.shifted:before { height: 4em; display: block; content: ""; }
 
 footer { flex: 0; height: 2em; line-height: 2em; background-color: #5F5F5F; color: white; }
 
@@ -139,8 +139,6 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 .hero-image-wrapper .hero-image-content .intro-text { padding-bottom: 3em; }
 
 .search-panel { min-height: calc(100vh - 3.75em); }
-
-.search-panel.hidden { display: none; }
 
 .search-panel .section-head { padding-top: 2em; padding-bottom: 1em; }
 
@@ -210,13 +208,11 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel.show { display: block; }
 
-.result-panel .control-wrapper { padding: 1em 0; }
+.result-panel .prediction-wrapper { padding: 1em 0; }
 
-.result-panel .control-wrapper.stick { animation: stick-to-top 0.5s cubic-bezier(0.5, -0.6, 0.9, -0.05) 0.3s 1 normal forwards; transition: padding 0.5s cubic-bezier(0.1, 0.9, 0.2, 0.8) 0.3s; padding: 0; }
+.result-panel .prediction-wrapper.stick { animation: stick-to-top 0.5s cubic-bezier(0.5, -0.6, 0.9, -0.05) 0.3s 1 normal forwards; transition: padding 0.5s cubic-bezier(0.1, 0.9, 0.2, 0.8) 0.3s; padding: 0; top: 3.75em; }
 
-.result-panel .control-wrapper.stick .prediction-panel { transition: border-radius 0.3s step-end; border-radius: 0; }
-
-.result-panel .control-wrapper.stick ~ .result-wrapper { transition: padding-top 0.3s step-end; padding-top: 5.75em; }
+.result-panel .prediction-wrapper.stick .prediction-panel { transition: border-radius 0.3s step-end; border-radius: 0; }
 
 .result-panel .prediction-panel { display: none; background-color: white; border-radius: 0.5em; overflow: hidden; box-shadow: 0 0.3em 0.5em; }
 
@@ -260,7 +256,9 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel .prediction-panel .predicted-word-wrapper .predicted-word-list .predicted-word { display: block; width: 100%; background-color: transparent; border-style: none; border-bottom: 0.1em solid rgba(0, 0, 0, 0.2); height: 3em; text-align: left; font-weight: bold; text-transform: capitalize; }
 
-.result-panel .word-wrapper { background-color: #FFD9A4; border-radius: 0.5em; margin-bottom: 2em; }
+.result-panel .word-list, .result-panel .word-item { padding: 1em 0; }
+
+.result-panel .word-wrapper { background-color: #FFD9A4; border-radius: 0.5em; }
 
 .result-panel .word-wrapper .word-header { padding: 0.5em 0.8em; display: flex; align-items: flex-end; font-size: 1.2em; border-bottom: 0.1em solid rgba(0, 0, 0, 0.3); }
 

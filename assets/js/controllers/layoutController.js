@@ -27,9 +27,13 @@
         this.view.render("showNavigation");
     };
 
-    Controller.prototype.scrollTo = function (scrollTop, offset) {
-        this.view.render("scrollTo", {scrollTop: scrollTop, offset: offset});
+    Controller.prototype.scrollTo = function (scrollTop) {
+        this.view.render("scrollTo", scrollTop);
     };
+
+	Controller.prototype.shiftPageWrapper = function() {
+		this.view.render("shiftPageWrapper");
+	};
 
 	// Export to window
 	window.app = window.app || {};
