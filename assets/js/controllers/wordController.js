@@ -37,6 +37,22 @@
 			self.searchForWord(phrase);
 		});
 
+		self.view.bind("goToTop", function () {
+			self.goToTop();
+		});
+
+		self.view.bind("previousResult", function () {
+			self.previousResult();
+		});
+
+		self.view.bind("nextResult", function () {
+			self.nextResult();
+		});
+
+		app.layout.controller.onScroll(function(scrollTop, scrollAreaHeight) {
+			self._setActiveResult(scrollTop, scrollAreaHeight);
+		});
+
 		self.view.bind("extraLinkClick", function () {
 			self._handleHash()
 		});
@@ -193,7 +209,28 @@
 		} else {
 			API.wordnik.getWordExamples(word, function(examples) { callback("examples", examples); });
 		}
+	};
 
+	Controller.prototype._setActiveResult = function (scrollTop, scrollAreaHeight) {
+		this.view.render("setActiveResult", { scrollTop: scrollTop, scrollAreaHeight: scrollAreaHeight });
+	};
+
+	Controller.prototype.goToTop = function () {
+		app.layout.controller.scrollTo(0);
+	};
+
+	Controller.prototype.previousResult = function () {
+		var prevWordItem = this.view.getPrevWordItem();
+		var predictedWordListHeader = this.view.getPredictedWordListHeader();
+		var scrollTop = prevWordItem.offsetTop - predictedWordListHeader.offsetHeight;
+		app.layout.controller.scrollTo(scrollTop);
+	};
+
+	Controller.prototype.nextResult = function () {
+		var nextWordItem = this.view.getNextWordItem();
+		var predictedWordListHeader = this.view.getPredictedWordListHeader();
+		var scrollTop = nextWordItem.offsetTop - predictedWordListHeader.offsetHeight;
+		app.layout.controller.scrollTo(scrollTop);
 	};
 
 	// Export to window

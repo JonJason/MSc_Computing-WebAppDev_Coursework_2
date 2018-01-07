@@ -39,6 +39,10 @@
 			UTIL.$on(self.$menuBtn, "click", function(event) {
 				handler();
 			});
+		} else if (event === "onScroll") {
+			UTIL.$on(self.$pageWrapper, "scroll", function(event) {
+				handler(self._getScrollTop() + self.$header.offsetHeight, self.$pageWrapper.offsetHeight);
+			});
 		};
 	};
 

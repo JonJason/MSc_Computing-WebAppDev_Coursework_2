@@ -238,11 +238,15 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .result-panel .word-wrapper .word-content .definition-wrapper .word-definition-list h5 { margin-top: 1em; margin-bottom: 0; }
 
+.result-panel .word-wrapper .word-content .definition-wrapper .word-definition-list p { text-align: justify; }
+
 .result-panel .word-wrapper .word-content .example-wrapper { padding-left: 1em; }
 
 .result-panel .word-wrapper .word-content .example-wrapper.opened .example-header:after { font-family: FontAwesome; content: ""; }
 
 .result-panel .word-wrapper .word-content .example-wrapper.opened .word-example-list { max-height: 10em; }
+
+.result-panel .word-wrapper .word-content .example-wrapper.opened .word-example-list p { text-align: justify; }
 
 .result-panel .word-wrapper .word-content .example-wrapper .example-header { cursor: pointer; }
 
@@ -259,6 +263,24 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 .result-panel .word-wrapper .word-content .phrase-wrapper .word-phrase-list .word-phrase-item:not(:last-child) { margin-right: 1em; }
 
 .result-panel .word-wrapper .word-content .phrase-wrapper .word-phrase-list .word-phrase-item .word-phrase { white-space: nowrap; height: 3em; border-radius: 0.25em; padding: 0 1em; border-style: none; background-color: #FFC470; }
+
+.result-wrapper.show-nav-btn .word-list { padding-right: 1.5em; }
+
+.result-wrapper.show-nav-btn .nav-btn-wrapper { display: flex; }
+
+.nav-btn-wrapper { position: fixed; bottom: 4em; right: 1em; display: none; flex-direction: column; }
+
+.nav-btn-wrapper .nav-position { margin: 0.5em 0; height: 2em; width: 2em; background-color: #89D0FF; box-shadow: 0 0.2em 0.3em #353537; color: #292929; font-size: 1.25em; text-align: center; vertical-align: middle; line-height: 2em; }
+
+.nav-btn-wrapper .nav-btn { height: 2em; width: 2em; line-height: 2em; border-radius: 1em; border-style: none; background-color: #89D0FF; box-shadow: 0 0.2em 0.3em #353537; color: #292929; font-size: 1.25em; }
+
+.nav-btn-wrapper .nav-btn.go-to-prev:before { font-family: FontAwesome; content: ""; }
+
+.nav-btn-wrapper .nav-btn.go-to-next:before { font-family: FontAwesome; content: ""; }
+
+.nav-btn-wrapper .nav-btn.go-to-top { margin-top: 2em; }
+
+.nav-btn-wrapper .nav-btn.go-to-top:before { font-family: FontAwesome; content: ""; }
 
 .prediction-panel { background-color: rgba(53, 53, 55, 0.5) !important; position: fixed; top: 3.75em; bottom: 0; left: 0; right: 0; display: none; padding: 2em; overflow-y: auto; }
 

@@ -12,6 +12,13 @@
     border-color: $color;
 }
 
+@mixin round($radius) {
+    height: 2 * $radius;
+    width: 2 * $radius;
+    line-height: 2 * $radius;
+    border-radius: $radius;
+}
+
 /*** font awesome hack ***/
 @mixin font-awesome($icon) {
     font-family: FontAwesome; // using font awesome icon
@@ -52,4 +59,16 @@
 
 @mixin fa-volume-down {
     @include font-awesome("\f027");
+}
+
+@mixin fa-angle-double-up {
+    @include font-awesome("\f102");
+}
+
+@mixin fa-angle-up {
+    @include font-awesome("\f106");
+}
+
+@mixin fa-angle-down {
+    @include font-awesome("\f107");
 }

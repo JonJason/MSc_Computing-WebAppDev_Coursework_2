@@ -31,6 +31,12 @@
         this.view.render("scrollTo", scrollTop);
     };
 
+    Controller.prototype.onScroll = function (callback) {
+        this.view.bind("onScroll", function(scrollTop, scrollAreaHeight) {
+			callback(scrollTop, scrollAreaHeight);
+		});
+    };
+
 	// Export to window
 	window.app = window.app || {};
 	window.app.LayoutController = Controller;

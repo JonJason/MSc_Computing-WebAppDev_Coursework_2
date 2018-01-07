@@ -270,7 +270,10 @@
                     h5 {
                         margin-top: 1em;
                         margin-bottom: 0;
+                    }
 
+                    p {
+                        text-align: justify;
                     }
 
                 }
@@ -287,6 +290,10 @@
 
                     .word-example-list {
                         max-height: 10em;
+
+                        p {
+                            text-align: justify;
+                        }
                     }
                 }
 
@@ -336,6 +343,69 @@
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.result-wrapper.show-nav-btn {
+
+    .word-list {
+        padding-right: 1.5em;
+    }
+
+    .nav-btn-wrapper {
+        display: flex;
+    }
+}
+
+.nav-btn-wrapper {
+    position: fixed;
+    bottom: 4em;
+    right: 1em;
+    display: none;
+    flex-direction: column;
+
+    .nav-position {
+        margin: 0.5em 0;
+        height: 2em;
+        width: 2em;
+        background-color: $bg-color-2;
+        box-shadow: 0 0.2em 0.3em $bg-color-3;
+        color: $font-color-2;
+        font-size: 1.25em;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 2em;
+    }
+
+    .nav-btn {
+        @include round(1em);
+        border-style: none;
+        background-color: $bg-color-2;
+        box-shadow: 0 0.2em 0.3em $bg-color-3;
+        color: $font-color-2;
+        font-size: 1.25em;
+
+        &.go-to-prev {
+
+            &:before {
+                @include fa-angle-up();
+            }
+        }
+
+        &.go-to-next {
+
+            &:before {
+                @include fa-angle-down();
+            }
+        }
+
+        &.go-to-top {
+            margin-top: 2em;
+
+            &:before {
+                @include fa-angle-double-up();
             }
         }
     }

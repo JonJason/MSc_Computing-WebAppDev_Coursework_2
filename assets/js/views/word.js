@@ -8,6 +8,7 @@
 
 		/* search-panel */
 		this.$searchPanel = UTIL.qs(".search-panel");
+
 		// search
 		this.$searchbarWrapper = UTIL.qs(".searchbar-wrapper", this.$searchPanel);
 		this.$searchbar = UTIL.qs(".searchbar", this.$searchbarWrapper);
@@ -24,14 +25,20 @@
 		this.$resultWrapper = UTIL.qs(".result-wrapper", this.$resultPanel);
 		this.$wordList = UTIL.qs(".word-list", this.$resultWrapper);
 		this.$emptyResult = UTIL.qs(".empty-result", this.$resultWrapper);
+		this.$btnGoToTop = UTIL.qs(".go-to-top", this.$resultWrapper);
+		this.$btnGoToPrev = UTIL.qs(".go-to-prev", this.$resultWrapper);
+		this.$btnGoToNext = UTIL.qs(".go-to-next", this.$resultWrapper);
+		this.$navPosition = UTIL.qs(".nav-position", this.$resultWrapper);
 
 		/* prediction-panel */
 		this.$predictionPanel = UTIL.qs(".prediction-panel");
 		this.$predictionWrapper = UTIL.qs(".prediction-wrapper", this.$predictionPanel);
+
 		// thumb
 		this.$imageWrapper = UTIL.qs(".image-wrapper", this.$predictionWrapper);
 		this.$thumb = UTIL.qs(".thumbnail", this.$imageWrapper);
 		this.$preloader = UTIL.qs(".preloader-overlay", this.$predictionWrapper);
+
 		// predicted word
 		this.$predictedWordWrapper = UTIL.qs(".predicted-word-wrapper", this.$predictionWrapper);
 		this.$predictedWordListHeader = UTIL.qs(".list-header", this.$predictedWordWrapper);
@@ -84,6 +91,18 @@
 			UTIL.$delegate(self.$extraLinkWrapper, ".extra-link", "click", function(event, currentTarget) {
 				handler();
 			});
+		} else if (event === "goToTop") {
+			UTIL.$on(this.$btnGoToTop, "click", function () {
+				handler();
+			});
+		} else if (event === "previousResult") {
+			UTIL.$on(this.$btnGoToPrev, "click", function () {
+				handler();
+			});
+		} else if (event === "nextResult") {
+			UTIL.$on(this.$btnGoToNext, "click", function () {
+				handler();
+			});
 		}
 	};
 
@@ -112,7 +131,6 @@
 				self._unstickPredictionPanelToHeader();
 				self._makePredictedWordNotCollapsible();
 				self._showThumbWrapper();
-
 			},
 
 			showThumb: function () {
@@ -141,6 +159,10 @@
 
 			collapsePredictedWord: function () {
 				self._collapsePredictedWord();
+			},
+
+			setActiveResult: function () {
+				self._setActiveResult(parameter.scrollTop, parameter.scrollAreaHeight);
 			}
 		};
 
@@ -347,8 +369,51 @@
 		}
 	};
 
+	View.prototype._setActiveResult = function (scrollTop, scrollAreaHeight) {
+		if (this.$wordList.children.length < 1) {
+			return;
+		}
+
+		// visible limit (half of the scroll area from top of the scroll area)
+		var cutoff = scrollAreaHeight * 0.5;
+		var children = this.$wordList.children;
+		for (var i = 0; i < children.length; i++) {
+			// if bottom line is visually below the cutoff line
+			if (children[i].offsetTop + children[i].offsetHeight - scrollTop >= cutoff) {
+				// store currently visible child's index for navigation purpose
+				this.$wordList.dataset.visibleChildIndex = i;
+				// update nav position
+				this.$navPosition.innerHTML = i + 1;
+
+				// show navigation when scrolling further than first result
+				if (i > 0) {
+					UTIL.$addClass(this.$resultWrapper, "show-nav-btn");
+				} else {
+					UTIL.$removeClass(this.$resultWrapper, "show-nav-btn");
+				}
+				return;
+			}
+		}
+	};
+
 	View.prototype.getWordItem = function (id) {
 		return UTIL.qs("#word_" + id, this.$wordList);
+	};
+
+	View.prototype.getNextWordItem = function (id) {
+		var wordList = this.$wordList;
+		var index = wordList.dataset.visibleChildIndex + 1;
+		if (index > wordList.childElementCount - 1) { // prevent overflow
+			index = wordList.childElementCount - 1;
+		}
+		return wordList.children[index];
+	};
+
+	View.prototype.getPrevWordItem = function (id) {
+		var wordList = this.$wordList;
+		var index = wordList.dataset.visibleChildIndex - 1;
+		if (index < 0) { index = 0; } // prevent overflow
+		return wordList.children[index];
 	};
 
 	View.prototype.getPredictedWordListHeader = function (id) {
