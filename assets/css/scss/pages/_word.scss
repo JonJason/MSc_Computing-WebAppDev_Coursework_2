@@ -178,172 +178,6 @@
 }
 
 .result-panel {
-    display: none;
-
-    &.show {
-        display: block;
-    }
-
-    .prediction-wrapper {
-        padding: 1em 0;
-
-        &.stick {
-            // got the cubic bezier coordinates using chrome dev tool
-            animation: stick-to-top 0.5s cubic-bezier(0.5,-0.6, 0.9,-0.05) 0.3s 1 normal forwards;
-            transition: padding 0.5s cubic-bezier(0.1, 0.9, 0.2, 0.8) 0.3s;
-            padding: 0;
-            top: $header-height;
-
-            .prediction-panel {
-                transition: border-radius 0.3s step-end;
-                border-radius: 0;
-            }
-        }
-    }
-
-    .prediction-panel {
-        display: none;
-        background-color: white;
-        border-radius: $panel-border-radius;
-        overflow: hidden;
-        box-shadow: 0 0.3em 0.5em;
-
-        &.show {
-            display: block;
-        }
-
-        .image-wrapper {
-            background-color: black;
-            position: relative;
-            width: 100%;
-
-            &:before { // pseudo element to retain the aspect ratio
-                display: block;
-                content: "";
-                width: 100%;
-                padding-top: 100%;
-            }
-
-            &.hidden {
-                display: none;
-            }
-
-            > .image-container { // image container to control the size of the image
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                padding: 1em;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                .thumbnail {
-                    display: block;
-
-                    &.fit-height {
-                        height: 100%;
-                    }
-
-                    &.fit-width {
-                        width: 100%;
-                    }
-                }
-            }
-
-            .preloader-overlay {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background-color: rgba(#000, 0.5);
-                display: none;
-                justify-content: center;
-                align-items: center;
-                font-size: 1.5em;
-                color: $font-color-1;
-
-                &.show {
-                    display: flex;
-
-                    &:before {
-                        content: attr(data-text);
-                    }
-
-                    &:after { // add dot animation behind the word predicting
-                        content: "";
-                        animation: dot-dot 1.5s ease-in-out infinite;
-                    }
-                }
-            }
-        }
-
-        .predicted-word-wrapper {
-
-            &.collapsible {
-
-                .list-header {
-                    &:after {
-                        @include fa-caret-up();
-                        padding-left: 0.5em;
-                    }
-                }
-
-                &.collapsed {
-
-                    .list-header {
-                        &:after {
-                            @include fa-caret-down();
-                        }
-                    }
-
-                    .predicted-word-list-wrapper {
-                        max-height: 0;
-                    }
-                }
-            }
-
-            .list-header {
-                border-bottom: 0.1em solid rgba(black, 0.2);
-                padding: 0 1em;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .predicted-word-list-wrapper {
-                max-height: 14em;
-                transition: max-height 0.3s;
-                overflow-y: auto;
-
-                &:after { // this is just a hack to prevent scrollbar going to far down to the round corner
-                    content: '';
-                    display: block;
-                    height: 1em;
-                }
-            }
-
-            .predicted-word-list {
-                padding: 1em;
-                padding-bottom: 0em;
-
-                .predicted-word {
-                    display: block;
-                    width: 100%;
-                    background-color: transparent;
-                    border-style: none;
-                    border-bottom: 0.1em solid rgba(black, 0.2);
-                    height: 3em;
-                    text-align: left;
-                    font-weight: bold;
-                    text-transform: capitalize;
-                }
-            }
-        }
-    }
 
     .word-list, .word-item {
         padding: 1em 0;
@@ -488,6 +322,179 @@
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.prediction-panel {
+    background-color: rgba($bg-color-3, 0.3) !important;
+    position: fixed;
+    top: $header-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    padding: 2em;
+    transition: padding 0.7s cubic-bezier(0.1, 0.9, 0.2, 0.8) 0.3s, background-color 0.3s;
+
+    &.show {
+        display: block;
+    }
+
+    &.stick {
+        // got the cubic bezier coordinates using chrome dev tool
+        animation: stick-to-top 0.7s cubic-bezier(0.5,-0.6, 0.9,-0.05) 0.3s 1 normal forwards;
+        padding: 0;
+        bottom: auto;
+        background-color: transparent !important;
+
+        .prediction-wrapper {
+            transition: border-radius 0.3s step-end;
+            border-radius: 0;
+        }
+    }
+}
+
+.prediction-wrapper {
+    background-color: white;
+    border-radius: $panel-border-radius;
+    overflow: hidden;
+    box-shadow: 0 0.3em 0.5em $bg-color-3;
+
+    .image-wrapper {
+        background-color: black;
+        position: relative;
+        width: 100%;
+        transition: max-height 0.3s;
+        max-height: 100em; // just for animation, not for limiting image size
+
+        &:before { // pseudo element to retain the aspect ratio
+            display: block;
+            content: "";
+            width: 100%;
+            padding-top: 100%;
+        }
+
+        &.hidden {
+            max-height: 0;
+            pointer-events: none;
+        }
+
+        > .image-container { // image container to control the size of the image
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .thumbnail {
+                display: block;
+
+                &.fit-height {
+                    height: 100%;
+                }
+
+                &.fit-width {
+                    width: 100%;
+                }
+            }
+        }
+
+        .preloader-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(#000, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            color: $font-color-1;
+
+            &.show {
+                display: flex;
+
+                &:before {
+                    content: attr(data-text);
+                }
+
+                &:after { // add dot animation behind the word predicting
+                    content: "";
+                    animation: dot-dot 1.5s ease-in-out infinite;
+                }
+            }
+        }
+    }
+
+    .predicted-word-wrapper {
+
+        &.collapsible {
+
+            .list-header {
+                &:after {
+                    @include fa-caret-up();
+                    padding-left: 0.5em;
+                }
+            }
+
+            &.collapsed {
+
+                .list-header {
+                    &:after {
+                        @include fa-caret-down();
+                    }
+                }
+
+                .predicted-word-list-wrapper {
+                    max-height: 0;
+                }
+            }
+        }
+
+        .list-header {
+            color: $font-color-2;
+            border-bottom: 0.1em solid rgba(black, 0.2);
+            padding: 0 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .predicted-word-list-wrapper {
+            max-height: 14em;
+            transition: max-height 0.3s;
+            overflow-y: auto;
+
+            &:after { // this is just a hack to prevent scrollbar going to far down to the round corner
+                content: '';
+                display: block;
+                height: 1em;
+            }
+        }
+
+        .predicted-word-list {
+            padding: 1em;
+            padding-bottom: 0em;
+
+            .predicted-word {
+                color: $font-color-2;
+                display: block;
+                width: 100%;
+                background-color: transparent;
+                border-style: none;
+                border-bottom: 0.1em solid rgba(black, 0.2);
+                height: 3em;
+                text-align: left;
+                font-weight: bold;
+                text-transform: capitalize;
             }
         }
     }

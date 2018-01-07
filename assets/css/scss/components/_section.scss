@@ -18,12 +18,12 @@
 section {
     &:nth-child(odd) .section-panel {
         background-color: $bg-color-3;
-        color: #FFFFFF;
+        color: white;
     }
 
     &:nth-child(even) .section-panel {
         background-color: $bg-color-4;
-        color: #0E0E0F;
+        color: $font-color-6;
     }
 
     .section-head {

@@ -38,20 +38,25 @@ block content
                     
         section#results
             .section-panel.result-panel
-                .prediction-wrapper
-                    .prediction-panel
-                        .image-wrapper
-                            .image-container
-                                img.thumbnail
-                                .preloader-overlay(data-text="Loading")
-                        .predicted-word-wrapper
-                            .list-header
-                                h3 Words
-                            .predicted-word-list-wrapper
-                                ul.predicted-word-list
+                .section-head
+                    h1 Results
                 .result-wrapper
+                    .empty-result
+                        p There is no result found yet
                     ul.word-list
-                
+        section#predictions
+            .section-panel.prediction-panel
+                .prediction-wrapper
+                    .image-wrapper
+                        .image-container
+                            img.thumbnail
+                            .preloader-overlay(data-text="Loading")
+                    .predicted-word-wrapper
+                        .list-header
+                            h3 Words
+                        .predicted-word-list-wrapper
+                            ul.predicted-word-list
+        
 block scripts
     include ../templates/wordTemplate
     script(src="https://sdk.clarifai.com/js/clarifai-latest.js")

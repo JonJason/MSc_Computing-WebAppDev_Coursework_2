@@ -18,20 +18,20 @@
 
 		/* result-panel */
 		this.$resultPanel = UTIL.qs(".result-panel");
-
-		// control wrapper
-		this.$predictionWrapper = UTIL.qs(".prediction-wrapper", this.$resultPanel);
-		this.$predictionPanel = UTIL.qs(".prediction-panel", this.$predictionWrapper);
-		this.$imageWrapper = UTIL.qs(".image-wrapper", this.$predictionPanel);
-		this.$thumb = UTIL.qs(".thumbnail", this.$imageWrapper);
-		this.$preloader = UTIL.qs(".preloader-overlay", this.$predictionPanel);
-		this.$predictedWordWrapper = UTIL.qs(".predicted-word-wrapper", this.$predictionPanel);
-		this.$predictedWordListHeader = UTIL.qs(".list-header", this.$predictedWordWrapper);
-		this.$predictedWordList = UTIL.qs(".predicted-word-list", this.$predictedWordWrapper);
-
-		// result wrapper
 		this.$resultWrapper = UTIL.qs(".result-wrapper", this.$resultPanel);
 		this.$wordList = UTIL.qs(".word-list", this.$resultWrapper);
+
+		/* prediction-panel */
+		this.$predictionPanel = UTIL.qs(".prediction-panel");
+		this.$predictionWrapper = UTIL.qs(".prediction-wrapper", this.$predictionPanel);
+		// thumb
+		this.$imageWrapper = UTIL.qs(".image-wrapper", this.$predictionWrapper);
+		this.$thumb = UTIL.qs(".thumbnail", this.$imageWrapper);
+		this.$preloader = UTIL.qs(".preloader-overlay", this.$predictionWrapper);
+		// predicted word
+		this.$predictedWordWrapper = UTIL.qs(".predicted-word-wrapper", this.$predictionWrapper);
+		this.$predictedWordListHeader = UTIL.qs(".list-header", this.$predictedWordWrapper);
+		this.$predictedWordList = UTIL.qs(".predicted-word-list", this.$predictedWordWrapper);
 	};
 
     /**
@@ -123,7 +123,7 @@
 
 			makePredictedWordCollapsible: function () {
 				self._makePredictedWordCollapsible();
-				self._stickControlWrapperToHeader();
+				self._stickPredictionPanelToHeader();
 			},
 
 			collapsePredictedWord: function () {
@@ -196,12 +196,12 @@
 		delete this.eventListener.PWCollapsible;
 	};
 
-	View.prototype._stickControlWrapperToHeader = function() {
-		UTIL.$addClass(this.$predictionWrapper, "stick");
+	View.prototype._stickPredictionPanelToHeader = function() {
+		UTIL.$addClass(this.$predictionPanel, "stick");
 	};
 
-	View.prototype._unstickControlWrapperToHeader = function() {
-		UTIL.$removeClass(this.$predictionWrapper, "stick");
+	View.prototype._unstickPredictionPanelToHeader = function() {
+		UTIL.$removeClass(this.$predictionPanel, "stick");
 	};
 
 	View.prototype._showThumbPreloader = function(text) {

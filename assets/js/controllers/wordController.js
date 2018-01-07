@@ -108,8 +108,6 @@
 				self.view.render("showPredictionResult", {
 					words: predictions.map(x => x.name)
 				});
-				var resultPanel = self.view.getResultPanel();
-				app.layout.controller.scrollTo(resultPanel.offsetTop);
 			});
 		});
 	};
