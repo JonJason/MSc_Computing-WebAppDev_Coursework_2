@@ -20,6 +20,7 @@
 		this.$resultPanel = UTIL.qs(".result-panel");
 		this.$resultWrapper = UTIL.qs(".result-wrapper", this.$resultPanel);
 		this.$wordList = UTIL.qs(".word-list", this.$resultWrapper);
+		this.$emptyResult = UTIL.qs(".empty-result", this.$resultWrapper);
 
 		/* prediction-panel */
 		this.$predictionPanel = UTIL.qs(".prediction-panel");
@@ -257,6 +258,7 @@
 	};
 
 	View.prototype._addWordItem = function(data) {
+		UTIL.$addClass(this.$emptyResult, "hidden");
 		var wordItem = UTIL.createElement(UTIL.parseTemplate("word_item", data));
 		this.$wordList.appendChild(wordItem);
 	};

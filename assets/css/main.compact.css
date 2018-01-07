@@ -202,6 +202,8 @@ button.ec-button.ec-green:hover { color: #ff8c00; border-color: #ff8c00; }
 
 .search-panel .extra-link-wrapper .extra-link-item .extra-link.random-word-link:before { font-family: FontAwesome; content: ""; color: #AEA8D3; }
 
+.result-panel .empty-result.hidden { display: none; }
+
 .result-panel .word-list, .result-panel .word-item { padding: 1em 0; }
 
 .result-panel .word-wrapper { background-color: #FFD9A4; border-radius: 0.5em; }
