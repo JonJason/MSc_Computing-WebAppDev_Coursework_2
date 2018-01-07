@@ -37,19 +37,25 @@
 			self.searchForWord(phrase);
 		});
 
-		var handleHash = function () {
-			var hash = document.location.hash.slice(1);
-			if (hash == "OTD") {
-				self.fetchWordOfTheDay();
-			} else if (hash == "random") {
-				self.searchRandomWord();
-			}
-		};
+		self.view.bind("extraLinkClick", function () {
+			self._handleHash()
+		});
 
-		UTIL.$on(window, 'hashchange', handleHash);
+		UTIL.$on(window, 'hashchange', function() {
+			self._handleHash();
+		});
 
-		handleHash();
+		self._handleHash();
 	}
+
+	Controller.prototype._handleHash = function () {
+		var hash = document.location.hash.slice(1);
+		if (hash == "OTD") {
+			this.fetchWordOfTheDay();
+		} else if (hash == "random") {
+			this.searchRandomWord();
+		}
+	};
 
 	Controller.prototype.lightenSearchbar = function () {
 		this.view.render("lightenSearchbar");

@@ -16,6 +16,9 @@
 		// image uploader
 		this.$imageUploader = UTIL.qs(".img-uploader", this.$searchPanel);
 
+		// extra link
+		this.$extraLinkWrapper = UTIL.qs(".extra-link-wrapper", this.$searchPanel);
+
 		/* result-panel */
 		this.$resultPanel = UTIL.qs(".result-panel");
 		this.$resultWrapper = UTIL.qs(".result-wrapper", this.$resultPanel);
@@ -76,6 +79,10 @@
 		} else if (event === "wordPhraseClick") {
 			UTIL.$delegate(self.$wordList, ".word-phrase", "click", function(event, currentTarget) {
 				handler(currentTarget.dataset.phrase);
+			});
+		} else if (event === "extraLinkClick") {
+			UTIL.$delegate(self.$extraLinkWrapper, ".extra-link", "click", function(event, currentTarget) {
+				handler();
 			});
 		}
 	};
