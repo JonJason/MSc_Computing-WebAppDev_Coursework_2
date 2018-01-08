@@ -612,4 +612,18 @@
 }
 
 @mixin word--lg() {
+    .nav-btn-wrapper {
+        bottom: 5em;
+        right: calc(50vw - 26.75em);
+    }
+
+    .prediction-panel {
+        padding: 2em calc(50vw - 10em);
+
+        &.stick {
+            // got the cubic bezier coordinates using chrome dev tool
+            animation-name: stick-to-top-large;
+            animation-timing-function: cubic-bezier(0, 0.89, 0.15, 0.92);
+        }
+    }
 }

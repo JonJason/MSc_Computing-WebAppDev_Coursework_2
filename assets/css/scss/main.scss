@@ -39,6 +39,7 @@
 
     // pages
     @include home--md();
+    @include word--md();
     @include about--md();
 }
 
@@ -49,5 +50,6 @@
 
     // pages
     @include home--lg();
+    @include word--lg();
     @include about--lg();
 }

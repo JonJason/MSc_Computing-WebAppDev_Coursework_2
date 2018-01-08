@@ -29,3 +29,14 @@
         left: 0;
     }
 }
+
+@keyframes stick-to-top-large {
+    0% {
+        right: calc(50vw - 10em);
+        left: calc(50vw - 10em);
+    }
+    100% {
+        right: 0;
+        left: 0;
+    }
+}
