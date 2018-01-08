@@ -9,7 +9,14 @@ block content
                 .section-content
                     .medium-content-wrapper
                         h2 Profile
-                        img.profile-picture(src="/assets/img/profile_picture.jpg")
+                        img.profile-picture(
+                            src="/assets/img/profile_picture/profile_picture.jpg"
+                            srcset="/assets/img/profile_picture/profile_picture_200.jpg 200w, \
+                                    /assets/img/profile_picture/profile_picture_944.jpg 944w, \
+                                    /assets/img/profile_picture/profile_picture.jpg 1054w"
+                            sizes="(min-width: 55em) 16vw, (min-width: 30em) 40vw, 80vw"
+                            alt="Profile Picture"
+                        )
                         .text-justify.text-container
                             span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sem nisl, 
                                 | fermentum nec lorem ac, viverra consequat orci. Nulla venenatis magna vitae 

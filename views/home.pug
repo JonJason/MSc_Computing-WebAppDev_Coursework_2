@@ -3,7 +3,6 @@ extends layout
 block content
     main
         .hero-image-wrapper
-            .hero-image-container
             .hero-image-content
                 .tag-line
                     h1 Find How to Express Yourself
@@ -13,6 +12,25 @@ block content
                     a(href="/word")
                         button.ec-button.ec-green
                             strong Let's Go!
+            .hero-image-container
+                    img(
+                        src="/assets/img/profile_picture/hero_image1_sm.jpg"
+                        srcset="/assets/img/profile_picture/hero_image1_sm200.jpg 200w \
+                                /assets/img/profile_picture/hero_image1_sm517.jpg 517w \
+                                /assets/img/profile_picture/hero_image1_sm765.jpg 765w \
+                                /assets/img/profile_picture/hero_image1_sm.jpg 1022w"
+                        sizes="(min-width: 55em) 40vw, (min-width: 30em) 45vw, 50vw"
+                        alt="Greeting"
+                    )
+                    img(
+                        src="assets/img/hero_image2/hero_image2_sm.png"
+                        srcset="/assets/img/profile_picture/hero_image2_sm200.jpg 200w \
+                                /assets/img/profile_picture/hero_image2_sm570.jpg 570w \
+                                /assets/img/profile_picture/hero_image2_sm851.jpg 851w \
+                                /assets/img/profile_picture/hero_image2_sm.jpg 1041w"
+                        sizes="(min-width: 55em) 40vw, (min-width: 30em) 45vw, 50vw"
+                        alt="Greeting response"
+                    )
         section#help
             .section-panel
                 .section-head

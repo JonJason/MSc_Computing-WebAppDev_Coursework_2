@@ -1,10 +1,24 @@
 .hero-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #3B598C;
-    padding-bottom: 3em;
-    min-height: 100vh;
+    min-height: calc(100vh - #{$header-height});
     margin: 0;
     @include body-side-gutter();
     color: white;
+
+    .hero-image-container {
+        display: flex;
+        justify-content: space-between;
+        height: 9.5em;
+        margin-left: -3.1em;
+        margin-right: -3.6em;
+
+        img {
+            height: 100%;
+        }
+    }
 
     .hero-image-content {
         max-width: 47.5em;
@@ -24,7 +38,35 @@
 }
 
 @mixin home--md() {
+    .hero-image-wrapper {
+
+        .hero-image-container {
+            height: 14.5em;
+            margin-left: -3.7em;
+            margin-right: -4.6em;
+        }
+    }
+}
+
+// custom screen
+@media only screen and (min-width: 35em) {
+    .hero-image-wrapper {
+
+        .hero-image-container {
+            margin-top: -6em;
+            margin-left: 1.3em;
+            margin-right: 0.4em;
+        }
+    }
 }
 
 @mixin home--lg() {
+    .hero-image-wrapper {
+
+        .hero-image-container {
+            height: 17.5em;
+            margin-left: 1.3em;
+            margin-right: 0.4em;
+        }
+    }
 }
