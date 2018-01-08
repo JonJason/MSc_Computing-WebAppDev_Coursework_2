@@ -24,6 +24,13 @@ server.get("/word", function(request, response) {
     });
 });
 
+server.get("/help", function(request, response) {
+    response.render("help", {
+        page: "help",
+        desc: "How to Use English Crawler Application"
+    });
+});
+
 server.get("/about", function(request, response) {
     response.render("about", {
         page: "about",
