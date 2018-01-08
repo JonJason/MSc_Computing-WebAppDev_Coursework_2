@@ -229,8 +229,11 @@ var UTIL = (function (UTIL) {
 		return size.width/size.height;
 	};
 
-	// I copied this function from the url below.
-	// https://stackoverflow.com/questions/3662821/how-to-correctly-use-innerhtml-to-create-an-element-with-possible-children-fro
+	/**
+	* I copied this function from the url below.
+	* https://stackoverflow.com/questions/3662821/how-to-correctly-use-innerhtml-to-create-an-element-with-possible-children-fro
+	* @param {String} str		- html string
+	*/
 	UTIL.createElement = function (str) {
 		// creates an imaginary Node Object
 	    var frag = document.createDocumentFragment();
@@ -244,6 +247,10 @@ var UTIL = (function (UTIL) {
 	    return frag;
 	};
 
+	/**
+	* @param {String} animation	- animation function
+	* @param {integer} duration - duration of the animation in millisecond
+	*/
 	UTIL.animate = function (animation, duration) {
 
 		var start = null;
@@ -255,7 +262,7 @@ var UTIL = (function (UTIL) {
 		  // call animation function with map progress value (0 to 1)
 		  animation(UTIL.easeInOutCubic(progress, duration));
 
-		  if (progress < duration) {
+		  if (progress < duration) { // if there is still time
 		    window.requestAnimationFrame(step);
 		  }
 		}
@@ -263,6 +270,11 @@ var UTIL = (function (UTIL) {
 		window.requestAnimationFrame(step);
 	};
 
+	/**
+	* ease in out cubic function, both parameter needs to be in the same unit
+	* @param {integer} t		- time variable
+	* @param {integer} duration - total duration
+	*/
 	UTIL.easeInOutCubic = function (t, duration) {
 		t /= duration/2; // twice of progress (value goes from 0 to 2)
 
@@ -274,15 +286,23 @@ var UTIL = (function (UTIL) {
 		return 1 - t*t*t/2;
 	};
 
+	/**
+	* deep clone function
+	* @param {object|array} o	- object to clone, however, it will work for array too
+	*/
 	UTIL.clone = function(o) {
 		var deepClone = function(obj) {
+			// neither array nor object
 			if (typeof obj !== "object" || obj === null) {
 				return obj;
 			}
 
-			if (obj.length !== undefined) { // is array
+			// is array
+			if (obj.length !== undefined) {
 				var value = [];
+				// iterate through each element
 				for (var element of obj) {
+					// push clone of the element to the new array
 					value.push(deepClone(element));
 				}
 
@@ -291,8 +311,10 @@ var UTIL = (function (UTIL) {
 
 			// is object.
 			var val = {};
+			// iterate through each property
 			for (var property in obj) {
 				if (obj.hasOwnProperty(property)) {
+					// assign clone of the property to property of the new object
 					val[property] = deepClone(obj[property]);
 				}
 			}
@@ -302,6 +324,12 @@ var UTIL = (function (UTIL) {
 		return deepClone(o);
 	};
 
+
+	/**
+	* compare date, month, and year
+	* @param {date} date1	- date 1
+	* @param {date} date2	- date 2
+	*/
 	UTIL.compareDate = function(date1, date2) {
 		if (date1.getDate() == date2.getDate()) {
 			return false;
